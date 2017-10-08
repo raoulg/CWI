@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy2 Experiment Builder (v1.85.4),
-    on Sun Oct  8 09:48:02 2017
+    on Sun Oct  8 10:30:20 2017
 If you publish work using this script please cite the PsychoPy publications:
     Peirce, JW (2007) PsychoPy - Psychophysics software in Python.
         Journal of Neuroscience Methods, 162(1-2), 8-13.
@@ -26,7 +26,7 @@ _thisDir = os.path.dirname(os.path.abspath(__file__)).decode(sys.getfilesystemen
 os.chdir(_thisDir)
 
 # Store info about the experiment session
-expName = 'movingDots'  # from the Builder filename that created this script
+expName = u'movingDots'  # from the Builder filename that created this script
 expInfo = {'participant':'', 'session':'001'}
 dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
 if dlg.OK == False:
@@ -67,9 +67,9 @@ else:
 # Initialize components for Routine "trial"
 trialClock = core.Clock()
 image = visual.ImageStim(
-    win=win, name='image',units='cm', 
+    win=win, name='image',units='pix', 
     image='sin', mask=None,
-    ori=0, pos=[xpos.pop(), 0], size=(2, 2),
+    ori=0, pos=[0,0], size=(100, 100),
     color=[1,1,1], colorSpace='rgb', opacity=1,
     flipHoriz=False, flipVert=False,
     texRes=128, interpolate=True, depth=0.0)
@@ -94,7 +94,9 @@ polygon_3 = visual.Rect(
     lineWidth=1, lineColor=[0.945,-1.000,-0.929], lineColorSpace='rgb',
     fillColor=[1,1,1], fillColorSpace='rgb',
     opacity=1, depth=-3.0, interpolate=True)
-xpos = [-10, 10] # list of positions 
+xposList = [-500, 500] # initial list
+xposRep = np.repeat(xposList, 5) # repeat
+xpos = np.ndarray.tolist(xposRep) # change objecttype to use .pop
 shuffle(xpos) # randomise order 
 
 # Create some handy timers
@@ -126,6 +128,7 @@ for thisTrial in trials:
     frameN = -1
     continueRoutine = True
     # update component parameters for each repeat
+    image.setPos([xpos.pop(), 0])
     image.setImage(imgName)
     key_resp_2 = event.BuilderKeyResponse()
     

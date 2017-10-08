@@ -5,4 +5,11 @@ print(a-2)
 
 x = np.array([-10,10])
 s = np.repeat(x, 5)
-print(s)
+
+
+xposList = [-500, 500] # initial list
+xposShuffle = np.repeat(xposList, 5) # expand 
+s2 = (xposShuffle) # randomise order 
+s3 = np.ndarray.tolist(s2)
+s3.pop()
+print(s2)
