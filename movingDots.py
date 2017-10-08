@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy2 Experiment Builder (v1.85.4),
-    on Sun Oct  8 11:31:21 2017
+    on Sun Oct  8 11:52:23 2017
 If you publish work using this script please cite the PsychoPy publications:
     Peirce, JW (2007) PsychoPy - Psychophysics software in Python.
         Journal of Neuroscience Methods, 162(1-2), 8-13.
@@ -99,6 +99,10 @@ xposRep = np.repeat(xposList, 5) # repeat
 xpos = np.ndarray.tolist(xposRep) # change objecttype to use .pop
 shuffle(xpos) # randomise order 
 
+xvelRand = np.random.rand(80) # 2 obj x 40 trials
+xvelWiden = xvelRand*1.5+0.5 # maak snelheden tussen 0.5 en 2
+xvelList = np.ndarray.tolist(xvelWiden) # change objecttype to use pop
+
 # Create some handy timers
 globalClock = core.Clock()  # to track the time since experiment started
 routineTimer = core.CountdownTimer()  # to track time remaining of each (non-slip) routine 
@@ -131,7 +135,8 @@ for thisTrial in trials:
     image.setPos([xpos.pop(), 0])
     image.setImage(imgName)
     key_resp_2 = event.BuilderKeyResponse()
-    
+    xvel1 = xvelList.pop()
+    xvel2 = xvelList.pop()
     # keep track of which components have finished
     trialComponents = [image, polygon, polygon_2, polygon_3, key_resp_2]
     for thisComponent in trialComponents:
@@ -165,7 +170,7 @@ for thisTrial in trials:
         if polygon.status == STARTED and t >= frameRemains:
             polygon.setAutoDraw(False)
         if polygon.status == STARTED:  # only update if drawing
-            polygon.setPos((-100+(frameN*2), 0), log=False)
+            polygon.setPos((-100+frameN*xvel1, 0), log=False)
         
         # *polygon_2* updates
         if t >= 0.0 and polygon_2.status == NOT_STARTED:
@@ -177,7 +182,7 @@ for thisTrial in trials:
         if polygon_2.status == STARTED and t >= frameRemains:
             polygon_2.setAutoDraw(False)
         if polygon_2.status == STARTED:  # only update if drawing
-            polygon_2.setPos((-100+frameN, 50), log=False)
+            polygon_2.setPos((-100+frameN*xvel2, 50), log=False)
         
         # *polygon_3* updates
         if t >= 0.0 and polygon_3.status == NOT_STARTED:
