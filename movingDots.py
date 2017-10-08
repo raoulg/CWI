@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy2 Experiment Builder (v1.85.4),
-    on Sun Oct  8 10:30:20 2017
+    on Sun Oct  8 11:31:21 2017
 If you publish work using this script please cite the PsychoPy publications:
     Peirce, JW (2007) PsychoPy - Psychophysics software in Python.
         Journal of Neuroscience Methods, 162(1-2), 8-13.
@@ -26,7 +26,7 @@ _thisDir = os.path.dirname(os.path.abspath(__file__)).decode(sys.getfilesystemen
 os.chdir(_thisDir)
 
 # Store info about the experiment session
-expName = u'movingDots'  # from the Builder filename that created this script
+expName = 'movingDots'  # from the Builder filename that created this script
 expInfo = {'participant':'', 'session':'001'}
 dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
 if dlg.OK == False:
@@ -77,15 +77,15 @@ polygon = visual.Polygon(
     win=win, name='polygon',units='pix', 
     edges=90, size=(20, 20),
     ori=0, pos=[0,0],
-    lineWidth=1, lineColor=[1,1,1], lineColorSpace='rgb',
-    fillColor=[-0.992,-0.835,0.961], fillColorSpace='rgb',
+    lineWidth=1, lineColor=[-1,-1,1], lineColorSpace='rgb',
+    fillColor=[-1,-1,1], fillColorSpace='rgb',
     opacity=1, depth=-1.0, interpolate=True)
 polygon_2 = visual.Polygon(
     win=win, name='polygon_2',units='pix', 
     edges=90, size=(20, 20),
     ori=0, pos=[0,0],
-    lineWidth=1, lineColor=[-1.000,-1.000,-1.000], lineColorSpace='rgb',
-    fillColor=[-0.976,-0.773,0.953], fillColorSpace='rgb',
+    lineWidth=1, lineColor=[-1,-1,1], lineColorSpace='rgb',
+    fillColor=[-1,-1,1], fillColorSpace='rgb',
     opacity=1, depth=-2.0, interpolate=True)
 polygon_3 = visual.Rect(
     win=win, name='polygon_3',units='pix', 
