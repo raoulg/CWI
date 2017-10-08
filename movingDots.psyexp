@@ -58,7 +58,7 @@
         <Param name="stopVal" updates="constant" val="6.0" valType="code"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="lineColor" updates="constant" val="$[-1,-1,1]" valType="str"/>
-        <Param name="pos" updates="set every frame" val="(-150+frameN*xvel1, 0)" valType="code"/>
+        <Param name="pos" updates="set every frame" val="(dir1*(-150+frameN*xvel1), 0)" valType="code"/>
         <Param name="interpolate" updates="constant" val="linear" valType="str"/>
         <Param name="startEstim" updates="None" val="" valType="code"/>
         <Param name="units" updates="None" val="pix" valType="str"/>
@@ -79,7 +79,7 @@
         <Param name="stopVal" updates="constant" val="6.0" valType="code"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="lineColor" updates="constant" val="$[-1,-1,1]" valType="str"/>
-        <Param name="pos" updates="set every frame" val="(-150+frameN*xvel2, 50)" valType="code"/>
+        <Param name="pos" updates="set every frame" val="(dir2*(-150+frameN*xvel2), 50)" valType="code"/>
         <Param name="interpolate" updates="constant" val="linear" valType="str"/>
         <Param name="startEstim" updates="None" val="" valType="code"/>
         <Param name="units" updates="None" val="pix" valType="str"/>
@@ -130,10 +130,10 @@
         <Param name="syncScreenRefresh" updates="constant" val="True" valType="bool"/>
       </KeyboardComponent>
       <CodeComponent name="code">
-        <Param name="Begin Experiment" updates="constant" val="xposList = [-500, 500] # initial list&amp;#10;xposRep = np.repeat(xposList, 5) # repeat&amp;#10;xpos = np.ndarray.tolist(xposRep) # change objecttype to use .pop&amp;#10;shuffle(xpos) # randomise order &amp;#10;&amp;#10;xvelRand = np.random.rand(80) # 2 obj x 40 trials&amp;#10;xvelWiden = xvelRand*1.5+0.5 # maak snelheden tussen 0.5 en 2&amp;#10;xvelList = np.ndarray.tolist(xvelWiden) # change objecttype to use pop&amp;#10;&amp;#10;gistTimeRand = np.random.rand(40) # 40 trials&amp;#10;gistTimeWiden = gistTimeRand*3+2 # gist tijd tussen 2 en 5 sec&amp;#10;gistTimeList = np.ndarray.tolist(gistTimeWiden) # use with pop" valType="extendedCode"/>
+        <Param name="Begin Experiment" updates="constant" val="xposList = [-500, 500] # initial list&amp;#10;xposRep = np.repeat(xposList, 5) # repeat&amp;#10;xpos = np.ndarray.tolist(xposRep) # change objecttype to use .pop&amp;#10;shuffle(xpos) # randomise order &amp;#10;&amp;#10;xvelRand = np.random.rand(80) # 2 obj x 40 trials&amp;#10;xvelWiden = xvelRand*1.5+0.5 # maak snelheden tussen 0.5 en 2&amp;#10;xvelList = np.ndarray.tolist(xvelWiden) # change objecttype to use pop&amp;#10;&amp;#10;gistTimeRand = np.random.rand(40) # 40 trials&amp;#10;gistTimeWiden = gistTimeRand*3+2 # gist tijd tussen 2 en 5 sec&amp;#10;gistTimeList = np.ndarray.tolist(gistTimeWiden) # use with pop&amp;#10;&amp;#10;directionRand = np.random.random_integers(0, 1, size = 80) # 2 obj x 40 trials&amp;#10;directionWiden = directionRand*2-1 # discrete waarden -1 of 1&amp;#10;directionList = np.ndarray.tolist(directionWiden) # use with pop" valType="extendedCode"/>
         <Param name="name" updates="None" val="code" valType="code"/>
         <Param name="Each Frame" updates="constant" val="" valType="extendedCode"/>
-        <Param name="Begin Routine" updates="constant" val="xvel1 = xvelList.pop()&amp;#10;xvel2 = xvelList.pop()&amp;#10;gistTime = gistTimeList.pop()" valType="extendedCode"/>
+        <Param name="Begin Routine" updates="constant" val="xvel1 = xvelList.pop()&amp;#10;xvel2 = xvelList.pop()&amp;#10;gistTime = gistTimeList.pop()&amp;#10;dir1 = directionList.pop()&amp;#10;dir2 = directionList.pop()" valType="extendedCode"/>
         <Param name="End Routine" updates="constant" val="" valType="extendedCode"/>
         <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
       </CodeComponent>
