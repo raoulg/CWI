@@ -38,7 +38,7 @@
         <Param name="stopVal" updates="constant" val="0.030" valType="code"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="mask" updates="constant" val="None" valType="str"/>
-        <Param name="pos" updates="constant" val="(10, 0)" valType="code"/>
+        <Param name="pos" updates="set every repeat" val="[xposShuffle.pop(), 0]" valType="code"/>
         <Param name="interpolate" updates="constant" val="linear" valType="str"/>
         <Param name="startEstim" updates="None" val="" valType="code"/>
         <Param name="units" updates="None" val="cm" valType="str"/>
@@ -129,6 +129,14 @@
         <Param name="store" updates="constant" val="last key" valType="str"/>
         <Param name="syncScreenRefresh" updates="constant" val="True" valType="bool"/>
       </KeyboardComponent>
+      <CodeComponent name="code">
+        <Param name="Begin Experiment" updates="constant" val="xposShuffle = [-10, -10, -10, -10, 10, 10, 10, 10] # list of positions &amp;#10;shuffle(xposShuffle) # randomise order " valType="extendedCode"/>
+        <Param name="name" updates="None" val="code" valType="code"/>
+        <Param name="Begin Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Each Frame" updates="constant" val="" valType="extendedCode"/>
+      </CodeComponent>
     </Routine>
   </Routines>
   <Flow>
@@ -141,7 +149,7 @@
       <Param name="nReps" updates="None" val="7" valType="code"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
       <Param name="conditions" updates="None" val="[{'imgName': u'gist/vrouw1.jpg', 'corrAns': u'v'}, {'imgName': u'gist/vrouw2.jpg', 'corrAns': u'v'}, {'imgName': u'gist/vrouw3.jpg', 'corrAns': u'v'}, {'imgName': u'gist/vrouw4.jpg', 'corrAns': u'v'}, {'imgName': u'gist/man1.jpg', 'corrAns': u'm'}, {'imgName': u'gist/man2.jpg', 'corrAns': u'm'}, {'imgName': u'gist/man3.jpg', 'corrAns': u'm'}]" valType="str"/>
-      <Param name="Selected rows" updates="None" val="" valType="code"/>
+      <Param name="Selected rows" updates="None" val="" valType="str"/>
     </LoopInitiator>
     <Routine name="trial"/>
     <LoopTerminator name="trials"/>
