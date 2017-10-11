@@ -14,5 +14,16 @@ from numpy.random import random, randint, normal, shuffle
 # s3.pop()
 # print(s2)
 
-sin = np.sin(3.14*30.5)
-print(sin)
+
+#sin = np.sin((ySeq/30)*np.pi)
+#print(sin)
+# yRange = np.arange(0.0, 600.0)
+# yFramerateAr = yRange/30
+# z = np.sin(yFramerateAr*np.pi)
+# print(yFramerateAr)
+#ySin1 = np.sin(yFramerate*np.pi*xvel2)
+#print(ySin1)
+
+stim = np.array([0,0])
+print(type(stim))
+print(stim[1])
