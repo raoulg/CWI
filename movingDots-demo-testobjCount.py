@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy2 Experiment Builder (v1.85.4),
-    on Sun Oct 15 12:11:51 2017
+    on Sun Oct 15 14:01:54 2017
 If you publish work using this script please cite the PsychoPy publications:
     Peirce, JW (2007) PsychoPy - Psychophysics software in Python.
         Journal of Neuroscience Methods, 162(1-2), 8-13.
@@ -26,7 +26,7 @@ _thisDir = os.path.dirname(os.path.abspath(__file__)).decode(sys.getfilesystemen
 os.chdir(_thisDir)
 
 # Store info about the experiment session
-expName = 'movingDots-demo-testobjCount'  # from the Builder filename that created this script
+expName = u'movingDots-demo-testobjCount'  # from the Builder filename that created this script
 expInfo = {u'session': u'001', u'participant': u'001'}
 dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
 if dlg.OK == False:
@@ -55,7 +55,7 @@ endExpNow = False  # flag for 'escape' or other condition => quit the exp
 win = visual.Window(
     size=(1280, 800), fullscr=True, screen=0,
     allowGUI=True, allowStencil=False,
-    monitor='testMonitor', color=[0,0,0], colorSpace='rgb',
+    monitor=u'testMonitor', color=[0,0,0], colorSpace='rgb',
     blendMode='avg', useFBO=True)
 # store frame rate of monitor if we can measure it
 expInfo['frameRate'] = win.getActualFrameRate()
@@ -278,12 +278,12 @@ for thisTrial in trials:
         image_2.setPos([xpos.pop(), xpos.pop()])
         image_2.setImage(imgName)
         xvel1 = xvelList.pop() #pop velocity
-        xvel2 = xvelList.pop()
+        xvel2 = xvelList.pop()/4
         gistTime = gistTimeList.pop() # pop gisttime
         dir1 = directionList.pop() # pop direction. TODO:add dir
         dir2 = directionList.pop()
         ySin1 = np.ndarray.tolist(50*np.sin(yFramerate*np.pi*xvel2)) # pop sin movement
-        ySin2 = np.ndarray.tolist(50*np.sin(yFramerate*np.pi*xvel1))
+        ySin2 = np.ndarray.tolist(50*np.sin(yFramerate*np.pi*xvel1*2))
         xCos1 = np.ndarray.tolist((150*np.cos(xFramerate*np.pi*xvel1)))
         xCos2 = np.ndarray.tolist((150*np.cos(xFramerate*np.pi*xvel2)))
         
@@ -355,23 +355,24 @@ for thisTrial in trials:
             frameRemains = 0.0 + 6.0- win.monitorFramePeriod * 0.75  # most of one frame period left
             if line_3.status == STARTED and t >= frameRemains:
                 line_3.setAutoDraw(False)
-            switch2_1Mem = switch2_1
+            
             if (polygon.pos[1] < 8) and (polygon.pos[1] > -8):
+              switch2_1Mem = switch2_1
               switch2_1 = 1
               if switch2_1Mem == 0:
                 obj2_1Count +=1
             else:
               switch2_1 = 0
             
-            switch2_2Mem = switch2_2
-            if (polygon.pos[1] < 8) and (polygon.pos[1] > -8):
+            if (polygon_2.pos[1] < 8) and (polygon_2.pos[1] > -8):
+              print(polygon_2.pos)
+              print(polygon_2.pos[1])
+              switch2_2Mem = switch2_2
               switch2_2 = 1
               if switch2_2Mem == 0:
                 obj2_2Count +=1
             else:
               switch2_2 = 0
-            
-            
             # *ratingMV* updates
             if t >= 6.0 and ratingMV.status == NOT_STARTED:
                 # keep track of start time/frame for later

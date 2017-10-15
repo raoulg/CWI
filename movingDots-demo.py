@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy2 Experiment Builder (v1.85.4),
-    on Sat Oct 14 09:47:58 2017
+    on Sun Oct 15 14:23:04 2017
 If you publish work using this script please cite the PsychoPy publications:
     Peirce, JW (2007) PsychoPy - Psychophysics software in Python.
         Journal of Neuroscience Methods, 162(1-2), 8-13.
@@ -64,6 +64,15 @@ if expInfo['frameRate'] != None:
 else:
     frameDur = 1.0 / 60.0  # could not measure, so guess
 
+# Initialize components for Routine "instructie"
+instructieClock = core.Clock()
+text = visual.TextStim(win=win, name='text',
+    text='Taak 1:\ntel hoe vaak de blauwe balletjes over de rode lijn gaan.\n\nTaak 2:\nIn de periferie komt een flits van een foto.\nIs dit een man of een vrouw?\n\ndruk een toets om te starten',
+    font='Arial',
+    pos=(0, 0), height=0.1, wrapWidth=None, ori=0, 
+    color='white', colorSpace='rgb', opacity=1,
+    depth=0.0);
+
 # Initialize components for Routine "obj2"
 obj2Clock = core.Clock()
 image_2 = visual.ImageStim(
@@ -94,36 +103,45 @@ line_3 = visual.Rect(
     lineWidth=1, lineColor=[0.945,-1.000,-0.929], lineColorSpace='rgb',
     fillColor=[1,1,1], fillColorSpace='rgb',
     opacity=1, depth=-3.0, interpolate=True)
+# setup positions for gist
 xposList = [-250, 250] # initial list
-xposRep = np.repeat(xposList, 240) # repeat for 120 gist images
-xpos = np.ndarray.tolist(xposRep) # change objecttype to use .pop
+xposRep = np.repeat(xposList, 120) # repeat for 60 gist images
+xpos = np.ndarray.tolist(xposRep) # change objecttype to use with pop
 shuffle(xpos) # randomise order 
 
-xvelRand = np.random.rand(560) # 14 obj x 40 trials
-xvelWiden = xvelRand*0.5+0.7 # maak snelheden tussen 0.5 en 1.5
+#setup velocities for objects
+xvelRand = np.random.rand(190) # (2+3+4) obj x 20 trials
+xvelWiden = xvelRand*0.5+0.7 # maak snelheden tussen 0.5 en 1.2
 xvelList = np.ndarray.tolist(xvelWiden) # change objecttype to use pop
 
-gistTimeRand = np.random.rand(120) # 120 trials
+#setup random gisttimes
+gistTimeRand = np.random.rand(60) # 60 trials
 gistTimeWiden = gistTimeRand*1.5+4 # gist tijd tussen 4 en 5.5 sec
 gistTimeList = np.ndarray.tolist(gistTimeWiden) # use with pop
 
-directionRand = np.random.random_integers(0, 1, size = 560) # 14 obj x 40 trials
+#setup random directions for objects
+directionRand = np.random.random_integers(0, 1, size = 190) # 9 obj x 20 trials
 directionWiden = directionRand*2-1 # discrete waarden -1 of 1
 directionList = np.ndarray.tolist(directionWiden) # use with pop
 
-yRange = np.arange(0.0, 800) # 60 fps, 6 sec = 360 frames
+#setup frames for x/y-sinus
+yRange = np.arange(0.0, 800) # 60 fps, 6 sec = 360 frames. 720 frames voor 120fps.
 yFramerate = yRange/30
 xFramerate = yRange/60
 
-rowAr = np.arange(80)
+#setup random order for gists across conditions
+rowAr = np.arange(80) # 80 fotos
 rowList = np.ndarray.tolist(rowAr)
-shuffle(rowList)
-rowCond1Full = rowList[0:20]
-rowCond2Full = rowList[21:41]
-rowCond3Full = rowList[42:62]
+shuffle(rowList) # random volgorde
+# selecteer 21 random fotos voor elke conditie
+rowCond1Full = rowList[0:21] 
+rowCond2Full = rowList[22:42]
+rowCond3Full = rowList[43:63]
+# pop voor elke trial 1 foto
 cond1 = rowCond1Full.pop()
 cond2 = rowCond2Full.pop()
 cond3 = rowCond3Full.pop()
+# slice zodat de var gebruikt kan worden in de trial
 rowCond1 = slice(cond1, cond1+1)
 rowCond2 = slice(cond2, cond2+1)
 rowCond3 = slice(cond3, cond3+1)
@@ -169,7 +187,7 @@ line_4 = visual.Rect(
     opacity=1, depth=-4.0, interpolate=True)
 
 ratingMV_4 = visual.RatingScale(win=win, name='ratingMV_4', marker='triangle', size=1.0, pos=[0.0, 0.5], choices=[u"'man'", u"'vrouw'"], tickHeight=-1)
-rating2_4 = visual.RatingScale(win=win, name='rating2_4', marker='triangle', size=1.0, pos=[0.0, -0.4], low=1, high=20, labels=["'1'", "'10'", "'20'"], scale='', markerStart='10')
+rating2_4 = visual.RatingScale(win=win, name='rating2_4', marker='triangle', size=1.0, pos=[0.0, -0.4], low=1, high=20, labels=["'1'", "'20'"], scale='', markerStart='10')
 
 # Initialize components for Routine "obj4_"
 obj4_Clock = core.Clock()
@@ -222,6 +240,85 @@ rating2_2 = visual.RatingScale(win=win, name='rating2_2', marker='triangle', siz
 # Create some handy timers
 globalClock = core.Clock()  # to track the time since experiment started
 routineTimer = core.CountdownTimer()  # to track time remaining of each (non-slip) routine 
+
+# ------Prepare to start Routine "instructie"-------
+t = 0
+instructieClock.reset()  # clock
+frameN = -1
+continueRoutine = True
+# update component parameters for each repeat
+key_resp_2 = event.BuilderKeyResponse()
+# keep track of which components have finished
+instructieComponents = [text, key_resp_2]
+for thisComponent in instructieComponents:
+    if hasattr(thisComponent, 'status'):
+        thisComponent.status = NOT_STARTED
+
+# -------Start Routine "instructie"-------
+while continueRoutine:
+    # get current time
+    t = instructieClock.getTime()
+    frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+    # update/draw components on each frame
+    
+    # *text* updates
+    if t >= 0.0 and text.status == NOT_STARTED:
+        # keep track of start time/frame for later
+        text.tStart = t
+        text.frameNStart = frameN  # exact frame index
+        text.setAutoDraw(True)
+    
+    # *key_resp_2* updates
+    if t >= 0.0 and key_resp_2.status == NOT_STARTED:
+        # keep track of start time/frame for later
+        key_resp_2.tStart = t
+        key_resp_2.frameNStart = frameN  # exact frame index
+        key_resp_2.status = STARTED
+        # keyboard checking is just starting
+        win.callOnFlip(key_resp_2.clock.reset)  # t=0 on next screen flip
+        event.clearEvents(eventType='keyboard')
+    if key_resp_2.status == STARTED:
+        theseKeys = event.getKeys()
+        
+        # check for quit:
+        if "escape" in theseKeys:
+            endExpNow = True
+        if len(theseKeys) > 0:  # at least one key was pressed
+            key_resp_2.keys = theseKeys[-1]  # just the last key pressed
+            key_resp_2.rt = key_resp_2.clock.getTime()
+            # a response ends the routine
+            continueRoutine = False
+    
+    # check if all components have finished
+    if not continueRoutine:  # a component has requested a forced-end of Routine
+        break
+    continueRoutine = False  # will revert to True if at least one component still running
+    for thisComponent in instructieComponents:
+        if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+            continueRoutine = True
+            break  # at least one component has not yet finished
+    
+    # check for quit (the Esc key)
+    if endExpNow or event.getKeys(keyList=["escape"]):
+        core.quit()
+    
+    # refresh the screen
+    if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+        win.flip()
+
+# -------Ending Routine "instructie"-------
+for thisComponent in instructieComponents:
+    if hasattr(thisComponent, "setAutoDraw"):
+        thisComponent.setAutoDraw(False)
+# check responses
+if key_resp_2.keys in ['', [], None]:  # No response was made
+    key_resp_2.keys=None
+thisExp.addData('key_resp_2.keys',key_resp_2.keys)
+if key_resp_2.keys != None:  # we had a response
+    thisExp.addData('key_resp_2.rt', key_resp_2.rt)
+thisExp.nextEntry()
+# the Routine "instructie" was not non-slip safe, so reset the non-slip timer
+routineTimer.reset()
 
 # set up handler to look after randomisation of conditions etc
 trials = data.TrialHandler(nReps=20, method='sequential', 
@@ -276,11 +373,15 @@ for thisTrial in trials:
         dir2 = directionList.pop()
         ySin1 = np.ndarray.tolist(50*np.sin(yFramerate*np.pi*xvel2))
         ySin2 = np.ndarray.tolist(50*np.sin(yFramerate*np.pi*xvel1))
-        xCos1 = np.ndarray.tolist((150*np.cos(xFramerate*np.pi*xvel1)))
-        xCos2 = np.ndarray.tolist((150*np.cos(xFramerate*np.pi*xvel2)))
+        xCos1 = np.ndarray.tolist((dir1*150*np.cos(xFramerate*np.pi*xvel1)))
+        xCos2 = np.ndarray.tolist((dir2*150*np.cos(xFramerate*np.pi*xvel2)))
         
+        # setup Objectcount
         obj2_1Count = 0
         obj2_2Count = 0
+        
+        switch2_1 = 0 #setup switch for counting
+        switch2_2 = 0
         
         cond1 = rowCond1Full.pop()
         rowCond1 = slice(cond1, cond1+1)
@@ -342,10 +443,21 @@ for thisTrial in trials:
             frameRemains = 0.0 + 6.0- win.monitorFramePeriod * 0.75  # most of one frame period left
             if line_3.status == STARTED and t >= frameRemains:
                 line_3.setAutoDraw(False)
-            if polygon.pos[1] == 0:
-                obj2_1Count = obj2_1Count + 1
-            if polygon_2.pos[1] == 0:
-                obj2_2Count = obj2_2Count + 1
+            if (polygon.pos[0] < 8) and (polygon.pos[0] > -8):
+              switch2_1Mem = switch2_1
+              switch2_1 = 1
+              if switch2_1Mem == 0:
+                obj2_1Count +=1
+            else:
+              switch2_1 = 0
+            
+            if (polygon_2.pos[0] < 8) and (polygon_2.pos[0] > -8):
+              switch2_2Mem = switch2_2
+              switch2_2 = 1
+              if switch2_2Mem == 0:
+                obj2_2Count +=1
+            else:
+              switch2_2 = 0
             # *ratingMV* updates
             if t >= 6.0 and ratingMV.status == NOT_STARTED:
                 # keep track of start time/frame for later
@@ -381,8 +493,8 @@ for thisTrial in trials:
         for thisComponent in obj2Components:
             if hasattr(thisComponent, "setAutoDraw"):
                 thisComponent.setAutoDraw(False)
-        thisExp.addData('obj2_1Count', obj2_1Count)
-        thisExp.addData('obj2_2Count', obj2_2Count)
+        trials_2.addData('obj2_1Count', obj2_1Count)
+        trials_2.addData('obj2_2Count', obj2_2Count)
         # store data for trials_2 (TrialHandler)
         trials_2.addData('ratingMV.response', ratingMV.getRating())
         trials_2.addData('ratingMV.rt', ratingMV.getRT())
@@ -402,6 +514,9 @@ for thisTrial in trials:
         params = trials_2.trialList[0].keys()
     # save data for this loop
     trials_2.saveAsExcel(filename + '.xlsx', sheetName='trials_2',
+        stimOut=params,
+        dataOut=['n','all_mean','all_std', 'all_raw'])
+    trials_2.saveAsText(filename + 'trials_2.csv', delim=',',
         stimOut=params,
         dataOut=['n','all_mean','all_std', 'all_raw'])
     
@@ -434,7 +549,7 @@ for thisTrial in trials:
         image.setImage(imgName)
         xvel1 = (xvelList.pop()*0.8)
         xvel2 = (xvelList.pop()*0.8)
-        xvel3 = (xvelList.pop()*0.8)
+        xvel3 = (xvelList.pop()*0.5)
         
         gistTime = gistTimeList.pop()
         dir1 = directionList.pop()
@@ -446,14 +561,17 @@ for thisTrial in trials:
         ySin2 = np.ndarray.tolist(50*np.sin(yFramerate*np.pi*xvel3))
         ySin3 = np.ndarray.tolist(50*np.sin(yFramerate*np.pi*xvel1))
         
-        xCos1 = np.ndarray.tolist((150*np.cos(xFramerate*np.pi*xvel3)))
-        xCos2 = np.ndarray.tolist((150*np.cos(xFramerate*np.pi*xvel1)))
-        xCos3 = np.ndarray.tolist((150*np.cos(xFramerate*np.pi*xvel2)))
+        xCos1 = np.ndarray.tolist((dir1*150*np.cos(xFramerate*np.pi*xvel3)))
+        xCos2 = np.ndarray.tolist((dir2*150*np.cos(xFramerate*np.pi*xvel1)))
+        xCos3 = np.ndarray.tolist((dir3*150*np.cos(xFramerate*np.pi*xvel2)))
         
         obj3_1Count = 0
         obj3_2Count = 0
         obj3_3Count = 0
         
+        switch3_1 = 0
+        switch3_2 = 0
+        switch3_3 = 0
         
         cond2 = rowCond2Full.pop()
         rowCond2 = slice(cond2, cond2+1)
@@ -527,12 +645,30 @@ for thisTrial in trials:
             frameRemains = 0.0 + 6.0- win.monitorFramePeriod * 0.75  # most of one frame period left
             if line_4.status == STARTED and t >= frameRemains:
                 line_4.setAutoDraw(False)
-            if polygon_10.pos[1] == 0:
-                obj3_1Count = obj3_1Count + 1
-            if polygon_14.pos[1] == 0:
-                obj3_2Count = obj3_2Count + 1
-            if polygon_15.pos[1] == 0:
-                obj3_3Count = obj3_3Count + 1
+            
+            if (polygon_10.pos[0] < 8) and (polygon_10.pos[0] > -8):
+              switch3_1Mem = switch3_1
+              switch3_1 = 1
+              if switch3_1Mem == 0:
+                obj3_1Count +=1
+            else:
+              switch3_1 = 0
+            
+            if (polygon_14.pos[0] < 8) and (polygon_14.pos[0] > -8):
+              switch3_2Mem = switch3_2
+              switch3_2 = 1
+              if switch3_2Mem == 0:
+                obj3_2Count +=1
+            else:
+              switch3_2 = 0
+            
+            if (polygon_15.pos[0] < 8) and (polygon_15.pos[0] > -8):
+              switch3_3Mem = switch3_3
+              switch3_3 = 1
+              if switch3_3Mem == 0:
+                obj3_3Count +=1
+            else:
+              switch3_3 = 0
             # *ratingMV_4* updates
             if t >= 6.0 and ratingMV_4.status == NOT_STARTED:
                 # keep track of start time/frame for later
@@ -568,9 +704,9 @@ for thisTrial in trials:
         for thisComponent in obj3Components:
             if hasattr(thisComponent, "setAutoDraw"):
                 thisComponent.setAutoDraw(False)
-        thisExp.addData('obj3_1Count', obj3_1Count)
-        thisExp.addData('obj3_2Count', obj3_2Count)
-        thisExp.addData('obj3_3Count', obj3_3Count)
+        trials_3.addData('obj3_1Count', obj3_1Count)
+        trials_3.addData('obj3_2Count', obj3_2Count)
+        trials_3.addData('obj3_3Count', obj3_3Count)
         # store data for trials_3 (TrialHandler)
         trials_3.addData('ratingMV_4.response', ratingMV_4.getRating())
         trials_3.addData('ratingMV_4.rt', ratingMV_4.getRT())
@@ -590,6 +726,9 @@ for thisTrial in trials:
         params = trials_3.trialList[0].keys()
     # save data for this loop
     trials_3.saveAsExcel(filename + '.xlsx', sheetName='trials_3',
+        stimOut=params,
+        dataOut=['n','all_mean','all_std', 'all_raw'])
+    trials_3.saveAsText(filename + 'trials_3.csv', delim=',',
         stimOut=params,
         dataOut=['n','all_mean','all_std', 'all_raw'])
     
@@ -622,8 +761,8 @@ for thisTrial in trials:
         image_3.setImage(imgName)
         xvel1 = (xvelList.pop()*0.8)
         xvel2 = (xvelList.pop()*0.8)
-        xvel3 = (xvelList.pop()*0.8)
-        xvel4 = (xvelList.pop()*0.8)
+        xvel3 = (xvelList.pop()*0.7)
+        xvel4 = (xvelList.pop()*0.5)
         gistTime = gistTimeList.pop()
         dir1 = directionList.pop()
         dir2 = directionList.pop()
@@ -633,15 +772,16 @@ for thisTrial in trials:
         ySin2 = np.ndarray.tolist(50*np.sin(yFramerate*np.pi*(xvel3/2)))
         ySin3 = np.ndarray.tolist(50*np.sin(yFramerate*np.pi*xvel2))
         ySin4 = np.ndarray.tolist(50*np.sin(yFramerate*np.pi*xvel1))
-        xCos1 = np.ndarray.tolist((150*np.cos(xFramerate*np.pi*xvel3)))
-        xCos2 = np.ndarray.tolist((150*np.cos(xFramerate*np.pi*xvel4)))
-        xCos3 = np.ndarray.tolist((150*np.cos(xFramerate*np.pi*xvel1)))
-        xCos4 = np.ndarray.tolist((150*np.cos(xFramerate*np.pi*xvel2)))
+        xCos1 = np.ndarray.tolist((dir1*150*np.cos(xFramerate*np.pi*xvel3)))
+        xCos2 = np.ndarray.tolist((dir2*150*np.cos(xFramerate*np.pi*xvel4)))
+        xCos3 = np.ndarray.tolist((dir3*150*np.cos(xFramerate*np.pi*xvel1)))
+        xCos4 = np.ndarray.tolist((dir4*150*np.cos(xFramerate*np.pi*xvel2)))
+        # set up counting objects
+        obj4_1Count = 0
+        obj4_2Count = 0
+        obj4_3Count = 0
+        obj4_4Count = 0
         
-        obj5_1Count = 0
-        obj5_2Count = 0
-        obj5_3Count = 0
-        obj5_4Count = 0
         cond3 = rowCond3Full.pop()
         rowCond3 = slice(cond3, cond3+1)
         ratingMV_2.reset()
@@ -726,14 +866,34 @@ for thisTrial in trials:
             frameRemains = 0.0 + 6.0- win.monitorFramePeriod * 0.75  # most of one frame period left
             if line_2.status == STARTED and t >= frameRemains:
                 line_2.setAutoDraw(False)
-            if polygon_8.pos[1] == 0:
-                obj5_1Count = obj5_1Count + 1
-            if polygon_9.pos[1] == 0:
-                obj5_2Count = obj5_2Count + 1
-            if polygon_12.pos[1] == 0:
-                obj5_3Count = obj5_3Count + 1
-            if polygon_13.pos[1] == 0:
-                obj5_4Count = obj5_4Count + 1
+            if (polygon_8.pos[0] < 8) and (polygon_8.pos[0] > -8):
+              switch4_1Mem = switch4_1
+              switch4_1 = 1
+              if switch4_1Mem == 0:
+                obj4_1Count +=1
+            else:
+              switch4_1 = 0
+            if (polygon_9.pos[0] < 8) and (polygon_9.pos[0] > -8):
+              switch4_2Mem = switch4_2
+              switch4_2 = 1
+              if switch4_2Mem == 0:
+                obj4_2Count +=1
+            else:
+              switch4_2 = 0
+            if (polygon_12.pos[0] < 8) and (polygon_12.pos[0] > -8):
+              switch4_3Mem = switch4_3
+              switch4_3 = 1
+              if switch4_3Mem == 0:
+                obj4_3Count +=1
+            else:
+              switch4_3 = 0
+            if (polygon_13.pos[0] < 8) and (polygon_13.pos[0] > -8):
+              switch4_4Mem = switch4_4
+              switch4_4 = 1
+              if switch4_4Mem == 0:
+                obj4_4Count +=1
+            else:
+              switch4_4 = 0
             # *ratingMV_2* updates
             if t >= 6.0 and ratingMV_2.status == NOT_STARTED:
                 # keep track of start time/frame for later
@@ -769,10 +929,10 @@ for thisTrial in trials:
         for thisComponent in obj4_Components:
             if hasattr(thisComponent, "setAutoDraw"):
                 thisComponent.setAutoDraw(False)
-        thisExp.addData('obj5_1Count', obj5_1Count)
-        thisExp.addData('obj5_2Count', obj5_2Count)
-        thisExp.addData('obj5_3Count', obj5_3Count)
-        thisExp.addData('obj5_4Count', obj5_4Count)
+        trials_4.addData('obj4_1Count', obj4_1Count)
+        trials_4.addData('obj4_2Count', obj4_2Count)
+        trials_4.addData('obj4_3Count', obj4_3Count)
+        trials_4.addData('obj4_4Count', obj4_4Count)
         # store data for trials_4 (TrialHandler)
         trials_4.addData('ratingMV_2.response', ratingMV_2.getRating())
         trials_4.addData('ratingMV_2.rt', ratingMV_2.getRT())
@@ -794,6 +954,9 @@ for thisTrial in trials:
     trials_4.saveAsExcel(filename + '.xlsx', sheetName='trials_4',
         stimOut=params,
         dataOut=['n','all_mean','all_std', 'all_raw'])
+    trials_4.saveAsText(filename + 'trials_4.csv', delim=',',
+        stimOut=params,
+        dataOut=['n','all_mean','all_std', 'all_raw'])
     thisExp.nextEntry()
     
 # completed 20 repeats of 'trials'
@@ -805,6 +968,9 @@ else:
     params = trials.trialList[0].keys()
 # save data for this loop
 trials.saveAsExcel(filename + '.xlsx', sheetName='trials',
+    stimOut=params,
+    dataOut=['n','all_mean','all_std', 'all_raw'])
+trials.saveAsText(filename + 'trials.csv', delim=',',
     stimOut=params,
     dataOut=['n','all_mean','all_std', 'all_raw'])
 
