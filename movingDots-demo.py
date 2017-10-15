@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy2 Experiment Builder (v1.85.4),
-    on Sun Oct 15 14:23:04 2017
+    on Sun Oct 15 16:06:42 2017
 If you publish work using this script please cite the PsychoPy publications:
     Peirce, JW (2007) PsychoPy - Psychophysics software in Python.
         Journal of Neuroscience Methods, 162(1-2), 8-13.
@@ -64,14 +64,75 @@ if expInfo['frameRate'] != None:
 else:
     frameDur = 1.0 / 60.0  # could not measure, so guess
 
+# Initialize components for Routine "instructies_2"
+instructies_2Clock = core.Clock()
+image_6 = visual.ImageStim(
+    win=win, name='image_6',units='pix', 
+    image='gist/instructies_obj.png', mask=None,
+    ori=0, pos=(300, 0), size=(230, 322),
+    color=[1,1,1], colorSpace='rgb', opacity=1,
+    flipHoriz=False, flipVert=False,
+    texRes=128, interpolate=True, depth=0.0)
+text_2 = visual.TextStim(win=win, name='text_2',
+    text='Je ziet straks meerdere bewegende blauwe balletjes\nin beeld, die over een rode lijn heen bewegen.',
+    font='Arial',
+    pos=(-0.5, 0), height=0.05, wrapWidth=None, ori=0, 
+    color='white', colorSpace='rgb', opacity=1,
+    depth=-1.0);
+
+# Initialize components for Routine "instructies_3"
+instructies_3Clock = core.Clock()
+image_8 = visual.ImageStim(
+    win=win, name='image_8',units='pix', 
+    image='gist/man6.png', mask=None,
+    ori=0, pos=(300, 0), size=(150, 150),
+    color=[1,1,1], colorSpace='rgb', opacity=1,
+    flipHoriz=False, flipVert=False,
+    texRes=128, interpolate=True, depth=0.0)
+text_4 = visual.TextStim(win=win, name='text_4',
+    text='Zeer kortdurend verschijnt er in een van de \nvier hoeken een foto van een man of vrouw.',
+    font='Arial',
+    pos=(-0.5, 0), height=0.05, wrapWidth=None, ori=0, 
+    color='white', colorSpace='rgb', opacity=1,
+    depth=-1.0);
+
 # Initialize components for Routine "instructie"
 instructieClock = core.Clock()
 text = visual.TextStim(win=win, name='text',
-    text='Taak 1:\ntel hoe vaak de blauwe balletjes over de rode lijn gaan.\n\nTaak 2:\nIn de periferie komt een flits van een foto.\nIs dit een man of een vrouw?\n\ndruk een toets om te starten',
+    text='Je hebt nu tegelijkertijd twee taken:\n\nTaak 1:\nTel hoe vaak er in totaal een blauwe balletje \nover de rode lijn gaat.\n\nFocus je blik op de rode lijn, niet op de balletjes.\n\nTaak 2:\nIs de foto een man of een vrouw?',
     font='Arial',
-    pos=(0, 0), height=0.1, wrapWidth=None, ori=0, 
+    pos=(-0.5, 0), height=0.05, wrapWidth=None, ori=0, 
     color='white', colorSpace='rgb', opacity=1,
     depth=0.0);
+
+# Initialize components for Routine "instructies_4"
+instructies_4Clock = core.Clock()
+image_7 = visual.ImageStim(
+    win=win, name='image_7',units='pix', 
+    image='gist/instructies_mv.png', mask=None,
+    ori=0, pos=(300, 200), size=(466, 202),
+    color=[1,1,1], colorSpace='rgb', opacity=1,
+    flipHoriz=False, flipVert=False,
+    texRes=128, interpolate=True, depth=0.0)
+text_3 = visual.TextStim(win=win, name='text_3',
+    text='Raporteer man of vrouw door op\nhet uiteinde van de lijn te klikken.',
+    font='Arial',
+    pos=(-0.5, 0.3), height=0.05, wrapWidth=None, ori=0, 
+    color='white', colorSpace='rgb', opacity=1,
+    depth=-1.0);
+image_9 = visual.ImageStim(
+    win=win, name='image_9',units='pix', 
+    image='gist/instructies_objcount.png', mask=None,
+    ori=0, pos=(300, -200), size=(491, 206),
+    color=[1,1,1], colorSpace='rgb', opacity=1,
+    flipHoriz=False, flipVert=False,
+    texRes=128, interpolate=True, depth=-3.0)
+text_5 = visual.TextStim(win=win, name='text_5',
+    text='Raporteer het totaal aantal keer dat de\nballetjes de lijn hebben gekruist\ndoor op de getallenlijn het juiste aantal \nte selecteren.\n\nDruk nu een toets om de test te starten.',
+    font='Arial',
+    pos=(-0.5, -0.3), height=0.05, wrapWidth=None, ori=0, 
+    color='white', colorSpace='rgb', opacity=1,
+    depth=-4.0);
 
 # Initialize components for Routine "obj2"
 obj2Clock = core.Clock()
@@ -241,6 +302,178 @@ rating2_2 = visual.RatingScale(win=win, name='rating2_2', marker='triangle', siz
 globalClock = core.Clock()  # to track the time since experiment started
 routineTimer = core.CountdownTimer()  # to track time remaining of each (non-slip) routine 
 
+# ------Prepare to start Routine "instructies_2"-------
+t = 0
+instructies_2Clock.reset()  # clock
+frameN = -1
+continueRoutine = True
+# update component parameters for each repeat
+key_resp_intro_1 = event.BuilderKeyResponse()
+# keep track of which components have finished
+instructies_2Components = [image_6, text_2, key_resp_intro_1]
+for thisComponent in instructies_2Components:
+    if hasattr(thisComponent, 'status'):
+        thisComponent.status = NOT_STARTED
+
+# -------Start Routine "instructies_2"-------
+while continueRoutine:
+    # get current time
+    t = instructies_2Clock.getTime()
+    frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+    # update/draw components on each frame
+    
+    # *image_6* updates
+    if t >= 0.0 and image_6.status == NOT_STARTED:
+        # keep track of start time/frame for later
+        image_6.tStart = t
+        image_6.frameNStart = frameN  # exact frame index
+        image_6.setAutoDraw(True)
+    
+    # *text_2* updates
+    if t >= 0.0 and text_2.status == NOT_STARTED:
+        # keep track of start time/frame for later
+        text_2.tStart = t
+        text_2.frameNStart = frameN  # exact frame index
+        text_2.setAutoDraw(True)
+    
+    # *key_resp_intro_1* updates
+    if t >= 0.0 and key_resp_intro_1.status == NOT_STARTED:
+        # keep track of start time/frame for later
+        key_resp_intro_1.tStart = t
+        key_resp_intro_1.frameNStart = frameN  # exact frame index
+        key_resp_intro_1.status = STARTED
+        # keyboard checking is just starting
+        win.callOnFlip(key_resp_intro_1.clock.reset)  # t=0 on next screen flip
+        event.clearEvents(eventType='keyboard')
+    if key_resp_intro_1.status == STARTED:
+        theseKeys = event.getKeys()
+        
+        # check for quit:
+        if "escape" in theseKeys:
+            endExpNow = True
+        if len(theseKeys) > 0:  # at least one key was pressed
+            key_resp_intro_1.keys = theseKeys[-1]  # just the last key pressed
+            key_resp_intro_1.rt = key_resp_intro_1.clock.getTime()
+            # a response ends the routine
+            continueRoutine = False
+    
+    # check if all components have finished
+    if not continueRoutine:  # a component has requested a forced-end of Routine
+        break
+    continueRoutine = False  # will revert to True if at least one component still running
+    for thisComponent in instructies_2Components:
+        if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+            continueRoutine = True
+            break  # at least one component has not yet finished
+    
+    # check for quit (the Esc key)
+    if endExpNow or event.getKeys(keyList=["escape"]):
+        core.quit()
+    
+    # refresh the screen
+    if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+        win.flip()
+
+# -------Ending Routine "instructies_2"-------
+for thisComponent in instructies_2Components:
+    if hasattr(thisComponent, "setAutoDraw"):
+        thisComponent.setAutoDraw(False)
+# check responses
+if key_resp_intro_1.keys in ['', [], None]:  # No response was made
+    key_resp_intro_1.keys=None
+thisExp.addData('key_resp_intro_1.keys',key_resp_intro_1.keys)
+if key_resp_intro_1.keys != None:  # we had a response
+    thisExp.addData('key_resp_intro_1.rt', key_resp_intro_1.rt)
+thisExp.nextEntry()
+# the Routine "instructies_2" was not non-slip safe, so reset the non-slip timer
+routineTimer.reset()
+
+# ------Prepare to start Routine "instructies_3"-------
+t = 0
+instructies_3Clock.reset()  # clock
+frameN = -1
+continueRoutine = True
+# update component parameters for each repeat
+key_resp_3 = event.BuilderKeyResponse()
+# keep track of which components have finished
+instructies_3Components = [image_8, text_4, key_resp_3]
+for thisComponent in instructies_3Components:
+    if hasattr(thisComponent, 'status'):
+        thisComponent.status = NOT_STARTED
+
+# -------Start Routine "instructies_3"-------
+while continueRoutine:
+    # get current time
+    t = instructies_3Clock.getTime()
+    frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+    # update/draw components on each frame
+    
+    # *image_8* updates
+    if t >= 0.0 and image_8.status == NOT_STARTED:
+        # keep track of start time/frame for later
+        image_8.tStart = t
+        image_8.frameNStart = frameN  # exact frame index
+        image_8.setAutoDraw(True)
+    
+    # *text_4* updates
+    if t >= 0.0 and text_4.status == NOT_STARTED:
+        # keep track of start time/frame for later
+        text_4.tStart = t
+        text_4.frameNStart = frameN  # exact frame index
+        text_4.setAutoDraw(True)
+    
+    # *key_resp_3* updates
+    if t >= 0.0 and key_resp_3.status == NOT_STARTED:
+        # keep track of start time/frame for later
+        key_resp_3.tStart = t
+        key_resp_3.frameNStart = frameN  # exact frame index
+        key_resp_3.status = STARTED
+        # keyboard checking is just starting
+        win.callOnFlip(key_resp_3.clock.reset)  # t=0 on next screen flip
+        event.clearEvents(eventType='keyboard')
+    if key_resp_3.status == STARTED:
+        theseKeys = event.getKeys()
+        
+        # check for quit:
+        if "escape" in theseKeys:
+            endExpNow = True
+        if len(theseKeys) > 0:  # at least one key was pressed
+            key_resp_3.keys = theseKeys[-1]  # just the last key pressed
+            key_resp_3.rt = key_resp_3.clock.getTime()
+            # a response ends the routine
+            continueRoutine = False
+    
+    # check if all components have finished
+    if not continueRoutine:  # a component has requested a forced-end of Routine
+        break
+    continueRoutine = False  # will revert to True if at least one component still running
+    for thisComponent in instructies_3Components:
+        if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+            continueRoutine = True
+            break  # at least one component has not yet finished
+    
+    # check for quit (the Esc key)
+    if endExpNow or event.getKeys(keyList=["escape"]):
+        core.quit()
+    
+    # refresh the screen
+    if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+        win.flip()
+
+# -------Ending Routine "instructies_3"-------
+for thisComponent in instructies_3Components:
+    if hasattr(thisComponent, "setAutoDraw"):
+        thisComponent.setAutoDraw(False)
+# check responses
+if key_resp_3.keys in ['', [], None]:  # No response was made
+    key_resp_3.keys=None
+thisExp.addData('key_resp_3.keys',key_resp_3.keys)
+if key_resp_3.keys != None:  # we had a response
+    thisExp.addData('key_resp_3.rt', key_resp_3.rt)
+thisExp.nextEntry()
+# the Routine "instructies_3" was not non-slip safe, so reset the non-slip timer
+routineTimer.reset()
+
 # ------Prepare to start Routine "instructie"-------
 t = 0
 instructieClock.reset()  # clock
@@ -318,6 +551,106 @@ if key_resp_2.keys != None:  # we had a response
     thisExp.addData('key_resp_2.rt', key_resp_2.rt)
 thisExp.nextEntry()
 # the Routine "instructie" was not non-slip safe, so reset the non-slip timer
+routineTimer.reset()
+
+# ------Prepare to start Routine "instructies_4"-------
+t = 0
+instructies_4Clock.reset()  # clock
+frameN = -1
+continueRoutine = True
+# update component parameters for each repeat
+key_resp_intro = event.BuilderKeyResponse()
+# keep track of which components have finished
+instructies_4Components = [image_7, text_3, key_resp_intro, image_9, text_5]
+for thisComponent in instructies_4Components:
+    if hasattr(thisComponent, 'status'):
+        thisComponent.status = NOT_STARTED
+
+# -------Start Routine "instructies_4"-------
+while continueRoutine:
+    # get current time
+    t = instructies_4Clock.getTime()
+    frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+    # update/draw components on each frame
+    
+    # *image_7* updates
+    if t >= 0.0 and image_7.status == NOT_STARTED:
+        # keep track of start time/frame for later
+        image_7.tStart = t
+        image_7.frameNStart = frameN  # exact frame index
+        image_7.setAutoDraw(True)
+    
+    # *text_3* updates
+    if t >= 0.0 and text_3.status == NOT_STARTED:
+        # keep track of start time/frame for later
+        text_3.tStart = t
+        text_3.frameNStart = frameN  # exact frame index
+        text_3.setAutoDraw(True)
+    
+    # *key_resp_intro* updates
+    if t >= 0.0 and key_resp_intro.status == NOT_STARTED:
+        # keep track of start time/frame for later
+        key_resp_intro.tStart = t
+        key_resp_intro.frameNStart = frameN  # exact frame index
+        key_resp_intro.status = STARTED
+        # keyboard checking is just starting
+        win.callOnFlip(key_resp_intro.clock.reset)  # t=0 on next screen flip
+        event.clearEvents(eventType='keyboard')
+    if key_resp_intro.status == STARTED:
+        theseKeys = event.getKeys()
+        
+        # check for quit:
+        if "escape" in theseKeys:
+            endExpNow = True
+        if len(theseKeys) > 0:  # at least one key was pressed
+            key_resp_intro.keys = theseKeys[-1]  # just the last key pressed
+            key_resp_intro.rt = key_resp_intro.clock.getTime()
+            # a response ends the routine
+            continueRoutine = False
+    
+    # *image_9* updates
+    if t >= 0.0 and image_9.status == NOT_STARTED:
+        # keep track of start time/frame for later
+        image_9.tStart = t
+        image_9.frameNStart = frameN  # exact frame index
+        image_9.setAutoDraw(True)
+    
+    # *text_5* updates
+    if t >= 0.0 and text_5.status == NOT_STARTED:
+        # keep track of start time/frame for later
+        text_5.tStart = t
+        text_5.frameNStart = frameN  # exact frame index
+        text_5.setAutoDraw(True)
+    
+    # check if all components have finished
+    if not continueRoutine:  # a component has requested a forced-end of Routine
+        break
+    continueRoutine = False  # will revert to True if at least one component still running
+    for thisComponent in instructies_4Components:
+        if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+            continueRoutine = True
+            break  # at least one component has not yet finished
+    
+    # check for quit (the Esc key)
+    if endExpNow or event.getKeys(keyList=["escape"]):
+        core.quit()
+    
+    # refresh the screen
+    if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+        win.flip()
+
+# -------Ending Routine "instructies_4"-------
+for thisComponent in instructies_4Components:
+    if hasattr(thisComponent, "setAutoDraw"):
+        thisComponent.setAutoDraw(False)
+# check responses
+if key_resp_intro.keys in ['', [], None]:  # No response was made
+    key_resp_intro.keys=None
+thisExp.addData('key_resp_intro.keys',key_resp_intro.keys)
+if key_resp_intro.keys != None:  # we had a response
+    thisExp.addData('key_resp_intro.rt', key_resp_intro.rt)
+thisExp.nextEntry()
+# the Routine "instructies_4" was not non-slip safe, so reset the non-slip timer
 routineTimer.reset()
 
 # set up handler to look after randomisation of conditions etc
@@ -781,6 +1114,10 @@ for thisTrial in trials:
         obj4_2Count = 0
         obj4_3Count = 0
         obj4_4Count = 0
+        switch4_1 = 0
+        switch4_2 = 0
+        switch4_3 = 0
+        switch4_4 = 0
         
         cond3 = rowCond3Full.pop()
         rowCond3 = slice(cond3, cond3+1)
