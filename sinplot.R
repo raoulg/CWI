@@ -1,8 +1,9 @@
-y = seq(0:365)
-plot(sin((y/30)*pi))
+y = seq(800)/60
 
+maxCos <- 150*cos(y*pi*1.2)
+minCos <- 150*cos(y*pi*0.25)
 
-plot(sin((y/30*1)*pi))
-plot(sin((y/30*0.5)*pi))
-plot(sin((y/30*2)*pi))
-((y/30)*pi)[1]
+plot(minCos)
+plot(maxCos)
+maxCos
+minCos
