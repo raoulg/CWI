@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy2 Experiment Builder (v1.85.4),
-    on Sun Oct 15 16:06:42 2017
+    on Sun Oct 15 22:50:55 2017
 If you publish work using this script please cite the PsychoPy publications:
     Peirce, JW (2007) PsychoPy - Psychophysics software in Python.
         Journal of Neuroscience Methods, 162(1-2), 8-13.
@@ -675,7 +675,7 @@ for thisTrial in trials:
     # set up handler to look after randomisation of conditions etc
     trials_2 = data.TrialHandler(nReps=1, method='sequential', 
         extraInfo=expInfo, originPath=-1,
-        trialList=data.importConditions('conditionsCopy.xlsx', selection=rowCond1),
+        trialList=data.importConditions('conditions.xlsx', selection=rowCond1),
         seed=None, name='trials_2')
     thisExp.addLoop(trials_2)  # add the loop to the experiment
     thisTrial_2 = trials_2.trialList[0]  # so we can initialise stimuli with some values
@@ -856,7 +856,7 @@ for thisTrial in trials:
     # set up handler to look after randomisation of conditions etc
     trials_3 = data.TrialHandler(nReps=1, method='sequential', 
         extraInfo=expInfo, originPath=-1,
-        trialList=data.importConditions('conditionsCopy.xlsx', selection=rowCond2),
+        trialList=data.importConditions('conditions.xlsx', selection=rowCond2),
         seed=None, name='trials_3')
     thisExp.addLoop(trials_3)  # add the loop to the experiment
     thisTrial_3 = trials_3.trialList[0]  # so we can initialise stimuli with some values
@@ -1068,7 +1068,7 @@ for thisTrial in trials:
     # set up handler to look after randomisation of conditions etc
     trials_4 = data.TrialHandler(nReps=1, method='sequential', 
         extraInfo=expInfo, originPath=-1,
-        trialList=data.importConditions('conditionsCopy.xlsx', selection=rowCond3),
+        trialList=data.importConditions('conditions.xlsx', selection=rowCond3),
         seed=None, name='trials_4')
     thisExp.addLoop(trials_4)  # add the loop to the experiment
     thisTrial_4 = trials_4.trialList[0]  # so we can initialise stimuli with some values
