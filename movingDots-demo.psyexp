@@ -418,7 +418,7 @@
       <CodeComponent name="code">
         <Param name="Begin Experiment" updates="constant" val="# setup positions for gist&amp;#10;xposList = [-250, 250] # initial list&amp;#10;xposRep = np.repeat(xposList, 120) # repeat for 60 gist images&amp;#10;xpos = np.ndarray.tolist(xposRep) # change objecttype to use with pop&amp;#10;shuffle(xpos) # randomise order &amp;#10;&amp;#10;#setup velocities for objects&amp;#10;xvelRand = np.random.rand(190) # (2+3+4) obj x 20 trials&amp;#10;xvelWiden = xvelRand*0.5+0.7 # maak snelheden tussen 0.5 en 1.2&amp;#10;xvelList = np.ndarray.tolist(xvelWiden) # change objecttype to use pop&amp;#10;&amp;#10;#setup random gisttimes&amp;#10;gistTimeRand = np.random.rand(60) # 60 trials&amp;#10;gistTimeWiden = gistTimeRand*1.5+4 # gist tijd tussen 4 en 5.5 sec&amp;#10;gistTimeList = np.ndarray.tolist(gistTimeWiden) # use with pop&amp;#10;&amp;#10;#setup random directions for objects&amp;#10;directionRand = np.random.random_integers(0, 1, size = 190) # 9 obj x 20 trials&amp;#10;directionWiden = directionRand*2-1 # discrete waarden -1 of 1&amp;#10;directionList = np.ndarray.tolist(directionWiden) # use with pop&amp;#10;&amp;#10;#setup frames for x/y-sinus&amp;#10;yRange = np.arange(0.0, 800) # 60 fps, 6 sec = 360 frames. 720 frames voor 120fps.&amp;#10;yFramerate = yRange/30&amp;#10;xFramerate = yRange/60&amp;#10;&amp;#10;#setup random order for gists across conditions&amp;#10;rowAr = np.arange(80) # 80 fotos&amp;#10;rowList = np.ndarray.tolist(rowAr)&amp;#10;shuffle(rowList) # random volgorde&amp;#10;# selecteer 21 random fotos voor elke conditie&amp;#10;rowCond1Full = rowList[0:21] &amp;#10;print(rowCond1Full)&amp;#10;rowCond2Full = rowList[22:42]&amp;#10;print(rowCond1Full)&amp;#10;rowCond3Full = rowList[43:63]&amp;#10;print(rowCond1Full)&amp;#10;# pop voor elke trial 1 foto&amp;#10;cond1 = rowCond1Full.pop()&amp;#10;cond2 = rowCond2Full.pop()&amp;#10;cond3 = rowCond3Full.pop()&amp;#10;# slice zodat de var gebruikt kan worden in de trial&amp;#10;rowCond1 = slice(cond1, cond1+1)&amp;#10;rowCond2 = slice(cond2, cond2+1)&amp;#10;rowCond3 = slice(cond3, cond3+1)" valType="extendedCode"/>
         <Param name="name" updates="None" val="code" valType="code"/>
-        <Param name="Begin Routine" updates="constant" val="# pop random speeds&amp;#10;xvel1 = xvelList.pop()&amp;#10;xvel2 = xvelList.pop()&amp;#10;# pop random timing&amp;#10;gistTime = gistTimeList.pop()&amp;#10;# pop random direction&amp;#10;dir1 = directionList.pop()&amp;#10;dir2 = directionList.pop()&amp;#10;&amp;#10;# stationary 30 frames&amp;#10;apndx = np.repeat(150, 30)&amp;#10;apndy = np.repeat(0, 30)&amp;#10;# create (co)sin waves&amp;#10;ySin1o = 50*np.sin(yFramerate*np.pi*(xvel1/2)) # make (co)sin&amp;#10;ySin1r = ySin1o[::-1] # reverse direction to start with 1 or 0&amp;#10;ySin1 = np.ndarray.tolist(np.append(ySin1r, apndy)) # append stationary&amp;#10;ySin2o = 50*np.sin(yFramerate*np.pi*(xvel2/2))&amp;#10;ySin2r = ySin2o[::-1]&amp;#10;ySin2 = np.ndarray.tolist(np.append(ySin2r, apndy))&amp;#10;xCos1o = dir1*150*np.cos(xFramerate*np.pi*xvel2)&amp;#10;xCos1r = xCos1o[::-1]&amp;#10;xCos1 = np.ndarray.tolist(np.append(xCos1r, (apndx*dir1)))&amp;#10;xCos2o = dir2*150*np.cos(xFramerate*np.pi*xvel1)&amp;#10;xCos2r = xCos2o[::-1]&amp;#10;xCos2 = np.ndarray.tolist(np.append(xCos2r, (apndx*dir2)))&amp;#10;&amp;#10;# setup Objectcount&amp;#10;obj2_1Count = 0&amp;#10;obj2_2Count = 0&amp;#10;&amp;#10;switch2_1 = 0 #setup switch for counting&amp;#10;switch2_2 = 0&amp;#10;&amp;#10;cond1 = rowCond1Full.pop()&amp;#10;print(cond1)&amp;#10;rowCond1 = slice(cond1, cond1+1)&amp;#10;print(rowCond1)" valType="extendedCode"/>
+        <Param name="Begin Routine" updates="constant" val="# pop random speeds&amp;#10;xvel1 = xvelList.pop()&amp;#10;xvel2 = xvelList.pop()&amp;#10;# pop random timing&amp;#10;gistTime = gistTimeList.pop()&amp;#10;# pop random direction&amp;#10;dir1 = directionList.pop()&amp;#10;dir2 = directionList.pop()&amp;#10;&amp;#10;# stationary 30 frames&amp;#10;apndx = np.repeat(150, 30)&amp;#10;apndy = np.repeat(0, 30)&amp;#10;# create (co)sin waves&amp;#10;ySin1o = 50*np.sin(yFramerate*np.pi*(xvel1/2)) # make (co)sin&amp;#10;ySin1r = ySin1o[::-1] # reverse direction to start with 1 or 0&amp;#10;ySin1 = np.ndarray.tolist(np.append(ySin1r, apndy)) # append stationary&amp;#10;ySin2o = 50*np.sin(yFramerate*np.pi*(xvel2/2))&amp;#10;ySin2r = ySin2o[::-1]&amp;#10;ySin2 = np.ndarray.tolist(np.append(ySin2r, apndy))&amp;#10;xCos1o = dir1*150*np.cos(xFramerate*np.pi*xvel2)&amp;#10;xCos1r = xCos1o[::-1]&amp;#10;xCos1 = np.ndarray.tolist(np.append(xCos1r, (apndx*dir1)))&amp;#10;xCos2o = dir2*150*np.cos(xFramerate*np.pi*xvel1)&amp;#10;xCos2r = xCos2o[::-1]&amp;#10;xCos2 = np.ndarray.tolist(np.append(xCos2r, (apndx*dir2)))&amp;#10;&amp;#10;# setup Objectcount&amp;#10;obj2_1Count = 0&amp;#10;obj2_2Count = 0&amp;#10;&amp;#10;switch2_1 = 0 #setup switch for counting&amp;#10;switch2_2 = 0&amp;#10;&amp;#10;cond1 = rowCond1Full.pop()&amp;#10;rowCond1 = slice(cond1, cond1+1)" valType="extendedCode"/>
         <Param name="End Routine" updates="constant" val="trials_2.addData('obj2_1Count', obj2_1Count)&amp;#10;trials_2.addData('obj2_2Count', obj2_2Count)" valType="extendedCode"/>
         <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Each Frame" updates="constant" val="if (polygon.pos[0] &lt; 8) and (polygon.pos[0] &gt; -8):&amp;#10;  switch2_1Mem = switch2_1&amp;#10;  switch2_1 = 1&amp;#10;  if switch2_1Mem == 0:&amp;#10;    obj2_1Count +=1&amp;#10;else:&amp;#10;  switch2_1 = 0&amp;#10;&amp;#10;if (polygon_2.pos[0] &lt; 8) and (polygon_2.pos[0] &gt; -8):&amp;#10;  switch2_2Mem = switch2_2&amp;#10;  switch2_2 = 1&amp;#10;  if switch2_2Mem == 0:&amp;#10;    obj2_2Count +=1&amp;#10;else:&amp;#10;  switch2_2 = 0" valType="extendedCode"/>
@@ -695,6 +695,52 @@
         <Param name="name" updates="None" val="rating2_5" valType="code"/>
         <Param name="singleClick" updates="constant" val="False" valType="bool"/>
       </RatingScaleComponent>
+    </Routine>
+    <Routine name="demografische_info">
+      <RatingScaleComponent name="leeftijd">
+        <Param name="labels" updates="constant" val="'17', '60'" valType="str"/>
+        <Param name="pos" updates="constant" val="0, -0.4" valType="str"/>
+        <Param name="high" updates="constant" val="60" valType="code"/>
+        <Param name="storeRating" updates="constant" val="True" valType="bool"/>
+        <Param name="marker" updates="constant" val="triangle" valType="str"/>
+        <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="markerStart" updates="constant" val="" valType="str"/>
+        <Param name="disappear" updates="constant" val="False" valType="bool"/>
+        <Param name="size" updates="constant" val="1.0" valType="code"/>
+        <Param name="tickHeight" updates="constant" val="" valType="str"/>
+        <Param name="showAccept" updates="constant" val="True" valType="bool"/>
+        <Param name="storeRatingTime" updates="constant" val="True" valType="bool"/>
+        <Param name="forceEndRoutine" updates="constant" val="True" valType="bool"/>
+        <Param name="low" updates="constant" val="17" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="visualAnalogScale" updates="constant" val="False" valType="bool"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="stopType" updates="None" val="condition" valType="str"/>
+        <Param name="scaleDescription" updates="constant" val="wat is je leeftijd?" valType="str"/>
+        <Param name="storeHistory" updates="constant" val="False" valType="bool"/>
+        <Param name="categoryChoices" updates="constant" val="" valType="str"/>
+        <Param name="customize_everything" updates="constant" val="" valType="str"/>
+        <Param name="name" updates="None" val="leeftijd" valType="code"/>
+        <Param name="singleClick" updates="constant" val="False" valType="bool"/>
+      </RatingScaleComponent>
+      <KeyboardComponent name="key_resp_4">
+        <Param name="correctAns" updates="constant" val="" valType="str"/>
+        <Param name="storeCorrect" updates="constant" val="False" valType="bool"/>
+        <Param name="name" updates="None" val="key_resp_4" valType="code"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="forceEndRoutine" updates="constant" val="True" valType="bool"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="discard previous" updates="constant" val="True" valType="bool"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="allowedKeys" updates="constant" val="" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="store" updates="constant" val="last key" valType="str"/>
+        <Param name="syncScreenRefresh" updates="constant" val="True" valType="bool"/>
+      </KeyboardComponent>
     </Routine>
     <Routine name="obj4_">
       <ImageComponent name="image_3">
@@ -1149,8 +1195,56 @@
         <Param name="syncScreenRefresh" updates="constant" val="True" valType="bool"/>
       </KeyboardComponent>
     </Routine>
+    <Routine name="geslacht">
+      <RatingScaleComponent name="manvrouw">
+        <Param name="labels" updates="constant" val="" valType="str"/>
+        <Param name="pos" updates="constant" val="0, -0.4" valType="str"/>
+        <Param name="high" updates="constant" val="1" valType="code"/>
+        <Param name="storeRating" updates="constant" val="True" valType="bool"/>
+        <Param name="marker" updates="constant" val="triangle" valType="str"/>
+        <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="markerStart" updates="constant" val="" valType="str"/>
+        <Param name="disappear" updates="constant" val="False" valType="bool"/>
+        <Param name="size" updates="constant" val="1.0" valType="code"/>
+        <Param name="tickHeight" updates="constant" val="" valType="str"/>
+        <Param name="showAccept" updates="constant" val="True" valType="bool"/>
+        <Param name="storeRatingTime" updates="constant" val="True" valType="bool"/>
+        <Param name="forceEndRoutine" updates="constant" val="True" valType="bool"/>
+        <Param name="low" updates="constant" val="0" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="visualAnalogScale" updates="constant" val="False" valType="bool"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="stopType" updates="None" val="condition" valType="str"/>
+        <Param name="scaleDescription" updates="constant" val="Ben je man of vrouw?" valType="str"/>
+        <Param name="storeHistory" updates="constant" val="False" valType="bool"/>
+        <Param name="categoryChoices" updates="constant" val="'vrouw', 'man'" valType="str"/>
+        <Param name="customize_everything" updates="constant" val="" valType="str"/>
+        <Param name="name" updates="None" val="manvrouw" valType="code"/>
+        <Param name="singleClick" updates="constant" val="False" valType="bool"/>
+      </RatingScaleComponent>
+      <KeyboardComponent name="key_resp_5">
+        <Param name="correctAns" updates="constant" val="" valType="str"/>
+        <Param name="storeCorrect" updates="constant" val="False" valType="bool"/>
+        <Param name="name" updates="None" val="key_resp_5" valType="code"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="forceEndRoutine" updates="constant" val="True" valType="bool"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="discard previous" updates="constant" val="True" valType="bool"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="allowedKeys" updates="constant" val="" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="store" updates="constant" val="last key" valType="str"/>
+        <Param name="syncScreenRefresh" updates="constant" val="True" valType="bool"/>
+      </KeyboardComponent>
+    </Routine>
   </Routines>
   <Flow>
+    <Routine name="demografische_info"/>
+    <Routine name="geslacht"/>
     <Routine name="instructies_2"/>
     <Routine name="instructies_3"/>
     <Routine name="instructie"/>
