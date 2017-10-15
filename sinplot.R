@@ -1,9 +1,11 @@
-y = seq(800)/60
+y = seq(800)/30
 
-maxCos <- 150*cos(y*pi*1.2)
-minCos <- 150*cos(y*pi*0.25)
+maxCos <- 50*sin(y*pi*1.2)
+minCos <- 50*sin(y*pi*0.25)
 
 plot(minCos)
 plot(maxCos)
-maxCos
-minCos
+head(maxCos)
+head(minCos)
+tail(maxCos)
+tail(minCos)
