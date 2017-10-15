@@ -892,21 +892,21 @@
   </Routines>
   <Flow>
     <LoopInitiator loopType="TrialHandler" name="trials">
-      <Param name="conditionsFile" updates="None" val="conditions.xlsx" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="conditionsCopy.xlsx" valType="str"/>
       <Param name="name" updates="None" val="trials" valType="code"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="random seed" updates="None" val="" valType="code"/>
       <Param name="loopType" updates="None" val="random" valType="str"/>
       <Param name="nReps" updates="None" val="1" valType="code"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
-      <Param name="conditions" updates="None" val="[{'imgName': u'gist/vrouw1.png', 'corrAns': u'v'}, {'imgName': u'gist/vrouw2.png', 'corrAns': u'v'}, {'imgName': u'gist/vrouw3.png', 'corrAns': u'v'}, {'imgName': u'gist/vrouw4.png', 'corrAns': u'v'}, {'imgName': u'gist/dier1.png', 'corrAns': u'v'}, {'imgName': u'gist/dier2.png', 'corrAns': u'v'}, {'imgName': u'gist/dier3.png', 'corrAns': u'v'}, {'imgName': u'gist/dier4.png', 'corrAns': u'v'}, {'imgName': u'gist/man1.png', 'corrAns': None}, {'imgName': u'gist/man2.png', 'corrAns': None}, {'imgName': u'gist/man3.png', 'corrAns': None}]" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'imgName': u'gist/vrouw5.png', 'corrAns': u'v'}, {'imgName': u'gist/man2.jpg', 'corrAns': u'm'}]" valType="str"/>
       <Param name="Selected rows" updates="None" val="" valType="str"/>
     </LoopInitiator>
     <Routine name="obj1"/>
+    <LoopTerminator name="trials"/>
     <Routine name="obj2"/>
     <Routine name="obj3"/>
     <Routine name="obj4__2"/>
     <Routine name="obj4_"/>
-    <LoopTerminator name="trials"/>
   </Flow>
 </PsychoPy2experiment>

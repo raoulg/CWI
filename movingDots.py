@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy2 Experiment Builder (v1.85.4),
-    on Tue Oct 10 20:27:31 2017
+    on Fri Oct 13 22:01:36 2017
 If you publish work using this script please cite the PsychoPy publications:
     Peirce, JW (2007) PsychoPy - Psychophysics software in Python.
         Journal of Neuroscience Methods, 162(1-2), 8-13.
@@ -11,7 +11,7 @@ If you publish work using this script please cite the PsychoPy publications:
 """
 
 from __future__ import absolute_import, division
-from psychopy import locale_setup, sound, gui, visual, core, data, event, logging, hardware
+from psychopy import locale_setup, sound, gui, visual, core, data, event, logging
 from psychopy.constants import (NOT_STARTED, STARTED, PLAYING, PAUSED,
                                 STOPPED, FINISHED, PRESSED, RELEASED, FOREVER)
 import numpy as np  # whole numpy lib is available, prepend 'np.'
@@ -26,7 +26,7 @@ _thisDir = os.path.dirname(os.path.abspath(__file__)).decode(sys.getfilesystemen
 os.chdir(_thisDir)
 
 # Store info about the experiment session
-expName = u'movingDots'  # from the Builder filename that created this script
+expName = 'movingDots'  # from the Builder filename that created this script
 expInfo = {u'session': u'001', u'participant': u'001'}
 dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
 if dlg.OK == False:
@@ -55,7 +55,7 @@ endExpNow = False  # flag for 'escape' or other condition => quit the exp
 win = visual.Window(
     size=(1280, 800), fullscr=True, screen=0,
     allowGUI=True, allowStencil=False,
-    monitor=u'testMonitor', color=[0,0,0], colorSpace='rgb',
+    monitor='testMonitor', color=[0,0,0], colorSpace='rgb',
     blendMode='avg', useFBO=True)
 # store frame rate of monitor if we can measure it
 expInfo['frameRate'] = win.getActualFrameRate()
@@ -87,7 +87,7 @@ line = visual.Rect(
     lineWidth=1, lineColor=[0.945,-1.000,-0.929], lineColorSpace='rgb',
     fillColor=[1,1,1], fillColorSpace='rgb',
     opacity=1, depth=-2.0, interpolate=True)
-xposList = [-500, 500] # initial list
+xposList = [-300, 300] # initial list
 xposRep = np.repeat(xposList, 120) # repeat for 120 gist images
 xpos = np.ndarray.tolist(xposRep) # change objecttype to use .pop
 shuffle(xpos) # randomise order 
@@ -107,7 +107,7 @@ directionList = np.ndarray.tolist(directionWiden) # use with pop
 yRange = np.arange(0.0, 800) # 60 fps, 6 sec = 360 frames
 yFramerate = yRange/30
 xFramerate = yRange/60
-ratingMV_3 = visual.RatingScale(win=win, name='ratingMV_3', marker=u'triangle', size=1.0, pos=[0.0, 0.5], choices=[u"'man'", u"'vrouw'"], tickHeight=-1)
+ratingMV_3 = visual.RatingScale(win=win, name='ratingMV_3', marker='triangle', size=1.0, pos=[0.0, 0.5], choices=[u"'man'", u"'vrouw'"], tickHeight=-1)
 rating2_3 = visual.RatingScale(win=win, name='rating2_3', marker='triangle', size=1.0, pos=[0.0, -0.4], low=1, high=20, labels=["'1'", "'20'"], scale='', disappear=True, markerStart='10')
 
 # Initialize components for Routine "obj2"
@@ -293,9 +293,9 @@ globalClock = core.Clock()  # to track the time since experiment started
 routineTimer = core.CountdownTimer()  # to track time remaining of each (non-slip) routine 
 
 # set up handler to look after randomisation of conditions etc
-trials = data.TrialHandler(nReps=2, method='random', 
+trials = data.TrialHandler(nReps=1, method='random', 
     extraInfo=expInfo, originPath=-1,
-    trialList=data.importConditions(u'conditions.xlsx'),
+    trialList=data.importConditions('conditionsCopy.xlsx'),
     seed=None, name='trials')
 thisExp.addLoop(trials)  # add the loop to the experiment
 thisTrial = trials.trialList[0]  # so we can initialise stimuli with some values
@@ -325,7 +325,6 @@ for thisTrial in trials:
     ySin1 = np.ndarray.tolist(50*np.sin(yFramerate*np.pi*xvel1))
     xCos1 = np.ndarray.tolist(150*np.cos(xFramerate*np.pi*(xvel1+0.5)))
     
-    obj1Count = 0
     ratingMV_3.reset()
     rating2_3.reset()
     # keep track of which components have finished
@@ -372,8 +371,7 @@ for thisTrial in trials:
         frameRemains = 0.0 + 6.0- win.monitorFramePeriod * 0.75  # most of one frame period left
         if line.status == STARTED and t >= frameRemains:
             line.setAutoDraw(False)
-        if polygon_11.pos[1] == 0:
-            obj1Count = obj1Count + 1
+        
         # *ratingMV_3* updates
         if t >= 6.0 and ratingMV_3.status == NOT_STARTED:
             # keep track of start time/frame for later
@@ -416,13 +414,11 @@ for thisTrial in trials:
     # store data for trials (TrialHandler)
     trials.addData('rating2_3.response', rating2_3.getRating())
     trials.addData('rating2_3.rt', rating2_3.getRT())
-    # store obj1Count
-    trials.addData('obj1Count', obj1Count)
     # the Routine "obj1" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
     thisExp.nextEntry()
     
-# completed 2 repeats of 'trials'
+# completed 1 repeats of 'trials'
 
 # get names of stimulus parameters
 if trials.trialList in ([], [None], None):
