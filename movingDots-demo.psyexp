@@ -4,7 +4,7 @@
     <Param name="Monitor" updates="None" val="testMonitor" valType="str"/>
     <Param name="color" updates="None" val="$[0,0,0]" valType="str"/>
     <Param name="colorSpace" updates="None" val="rgb" valType="str"/>
-    <Param name="Experiment info" updates="None" val="{u'session': u'001', u'participant': u'001'}" valType="code"/>
+    <Param name="Experiment info" updates="None" val="{u'session': u'001', u'participant': u''}" valType="code"/>
     <Param name="JS libs" updates="None" val="packaged" valType="str"/>
     <Param name="Units" updates="None" val="use prefs" valType="str"/>
     <Param name="Save excel file" updates="None" val="True" valType="bool"/>
@@ -23,7 +23,7 @@
     <Param name="Data filename" updates="None" val="u'data/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])" valType="code"/>
     <Param name="Show info dlg" updates="None" val="True" valType="bool"/>
     <Param name="expName" updates="None" val="movingDots-demo" valType="str"/>
-    <Param name="logging level" updates="None" val="data" valType="code"/>
+    <Param name="logging level" updates="None" val="error" valType="code"/>
     <Param name="Screen" updates="None" val="1" valType="num"/>
   </Settings>
   <Routines>
@@ -168,7 +168,7 @@
         <Param name="stopVal" updates="constant" val="0.030" valType="code"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="mask" updates="constant" val="None" valType="str"/>
-        <Param name="pos" updates="set every repeat" val="[xpos.pop(), xpos.pop()]" valType="code"/>
+        <Param name="pos" updates="set every repeat" val="[xpos.pop(), ypos.pop()]" valType="code"/>
         <Param name="interpolate" updates="constant" val="linear" valType="str"/>
         <Param name="startEstim" updates="None" val="" valType="code"/>
         <Param name="units" updates="None" val="pix" valType="str"/>
@@ -272,7 +272,7 @@
         <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Each Frame" updates="constant" val="&amp;#10;if (polygon_10.pos[0] &lt; 8) and (polygon_10.pos[0] &gt; -8):&amp;#10;  switch3_1Mem = switch3_1&amp;#10;  switch3_1 = 1&amp;#10;  if switch3_1Mem == 0:&amp;#10;    obj3_1Count +=1&amp;#10;else:&amp;#10;  switch3_1 = 0&amp;#10;&amp;#10;if (polygon_14.pos[0] &lt; 8) and (polygon_14.pos[0] &gt; -8):&amp;#10;  switch3_2Mem = switch3_2&amp;#10;  switch3_2 = 1&amp;#10;  if switch3_2Mem == 0:&amp;#10;    obj3_2Count +=1&amp;#10;else:&amp;#10;  switch3_2 = 0&amp;#10;&amp;#10;if (polygon_15.pos[0] &lt; 8) and (polygon_15.pos[0] &gt; -8):&amp;#10;  switch3_3Mem = switch3_3&amp;#10;  switch3_3 = 1&amp;#10;  if switch3_3Mem == 0:&amp;#10;    obj3_3Count +=1&amp;#10;else:&amp;#10;  switch3_3 = 0" valType="extendedCode"/>
       </CodeComponent>
-      <RatingScaleComponent name="ratingMV_4">
+      <RatingScaleComponent name="ratingMV3_">
         <Param name="labels" updates="constant" val="" valType="str"/>
         <Param name="pos" updates="constant" val="0, 0.5" valType="str"/>
         <Param name="high" updates="constant" val="1" valType="code"/>
@@ -295,18 +295,18 @@
         <Param name="stopType" updates="None" val="condition" valType="str"/>
         <Param name="scaleDescription" updates="constant" val="" valType="str"/>
         <Param name="storeHistory" updates="constant" val="False" valType="bool"/>
-        <Param name="categoryChoices" updates="constant" val="'man', 'vrouw'" valType="str"/>
+        <Param name="categoryChoices" updates="constant" val="'man', 'geen foto gezien', 'vrouw'" valType="str"/>
         <Param name="customize_everything" updates="constant" val="" valType="str"/>
-        <Param name="name" updates="None" val="ratingMV_4" valType="code"/>
+        <Param name="name" updates="None" val="ratingMV3_" valType="code"/>
         <Param name="singleClick" updates="constant" val="False" valType="bool"/>
       </RatingScaleComponent>
-      <RatingScaleComponent name="rating2_4">
+      <RatingScaleComponent name="rating3_">
         <Param name="labels" updates="constant" val="'1','20'" valType="str"/>
         <Param name="pos" updates="constant" val="0, -0.4" valType="str"/>
         <Param name="high" updates="constant" val="20" valType="code"/>
         <Param name="storeRating" updates="constant" val="True" valType="bool"/>
         <Param name="marker" updates="constant" val="triangle" valType="str"/>
-        <Param name="startVal" updates="None" val="$ratingMV_4.status==FINISHED" valType="code"/>
+        <Param name="startVal" updates="None" val="$ratingMV3_.status==FINISHED" valType="code"/>
         <Param name="markerStart" updates="constant" val="10" valType="str"/>
         <Param name="disappear" updates="constant" val="False" valType="bool"/>
         <Param name="size" updates="constant" val="1.0" valType="code"/>
@@ -325,7 +325,7 @@
         <Param name="storeHistory" updates="constant" val="False" valType="bool"/>
         <Param name="categoryChoices" updates="constant" val="" valType="str"/>
         <Param name="customize_everything" updates="constant" val="" valType="str"/>
-        <Param name="name" updates="None" val="rating2_4" valType="code"/>
+        <Param name="name" updates="None" val="rating3_" valType="code"/>
         <Param name="singleClick" updates="constant" val="False" valType="bool"/>
       </RatingScaleComponent>
     </Routine>
@@ -340,7 +340,7 @@
         <Param name="stopVal" updates="constant" val="0.030" valType="code"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="mask" updates="constant" val="None" valType="str"/>
-        <Param name="pos" updates="set every repeat" val="[xpos.pop(), xpos.pop()]" valType="code"/>
+        <Param name="pos" updates="set every repeat" val="[xpos.pop(), ypos.pop()]" valType="code"/>
         <Param name="interpolate" updates="constant" val="linear" valType="str"/>
         <Param name="startEstim" updates="None" val="" valType="code"/>
         <Param name="units" updates="None" val="pix" valType="str"/>
@@ -416,14 +416,14 @@
         <Param name="size" updates="constant" val="(1, 300)" valType="code"/>
       </PolygonComponent>
       <CodeComponent name="code">
-        <Param name="Begin Experiment" updates="constant" val="# setup positions for gist&amp;#10;xposList = [-250, 250] # initial list&amp;#10;xposRep = np.repeat(xposList, 120) # repeat for 60 gist images&amp;#10;xpos = np.ndarray.tolist(xposRep) # change objecttype to use with pop&amp;#10;shuffle(xpos) # randomise order &amp;#10;&amp;#10;#setup velocities for objects&amp;#10;xvelRand = np.random.rand(190) # (2+3+4) obj x 20 trials&amp;#10;xvelWiden = xvelRand*0.5+0.7 # maak snelheden tussen 0.5 en 1.2&amp;#10;xvelList = np.ndarray.tolist(xvelWiden) # change objecttype to use pop&amp;#10;&amp;#10;#setup random gisttimes&amp;#10;gistTimeRand = np.random.rand(60) # 60 trials&amp;#10;gistTimeWiden = gistTimeRand*1.5+4 # gist tijd tussen 4 en 5.5 sec&amp;#10;gistTimeList = np.ndarray.tolist(gistTimeWiden) # use with pop&amp;#10;&amp;#10;#setup random directions for objects&amp;#10;directionRand = np.random.random_integers(0, 1, size = 190) # 9 obj x 20 trials&amp;#10;directionWiden = directionRand*2-1 # discrete waarden -1 of 1&amp;#10;directionList = np.ndarray.tolist(directionWiden) # use with pop&amp;#10;&amp;#10;#setup frames for x/y-sinus&amp;#10;yRange = np.arange(0.0, 800) # 60 fps, 6 sec = 360 frames. 720 frames voor 120fps.&amp;#10;yFramerate = yRange/30&amp;#10;xFramerate = yRange/60&amp;#10;&amp;#10;#setup random order for gists across conditions&amp;#10;rowAr = np.arange(80) # 80 fotos&amp;#10;rowList = np.ndarray.tolist(rowAr)&amp;#10;shuffle(rowList) # random volgorde&amp;#10;# selecteer 21 random fotos voor elke conditie&amp;#10;rowCond1Full = rowList[0:21] &amp;#10;print(rowCond1Full)&amp;#10;rowCond2Full = rowList[22:42]&amp;#10;print(rowCond1Full)&amp;#10;rowCond3Full = rowList[43:63]&amp;#10;print(rowCond1Full)&amp;#10;# pop voor elke trial 1 foto&amp;#10;cond1 = rowCond1Full.pop()&amp;#10;cond2 = rowCond2Full.pop()&amp;#10;cond3 = rowCond3Full.pop()&amp;#10;# slice zodat de var gebruikt kan worden in de trial&amp;#10;rowCond1 = slice(cond1, cond1+1)&amp;#10;rowCond2 = slice(cond2, cond2+1)&amp;#10;rowCond3 = slice(cond3, cond3+1)" valType="extendedCode"/>
+        <Param name="Begin Experiment" updates="constant" val="# setup positions for gist&amp;#10;xposList = [-250, 250] # initial list&amp;#10;xposRep = np.repeat(xposList, 65) # repeat for 60 gist images&amp;#10;xpos = np.ndarray.tolist(xposRep) # change objecttype to use with pop&amp;#10;shuffle(xpos) # randomise order &amp;#10;&amp;#10;yposList = [-250, 250, 0] # initial list&amp;#10;yposRep = np.repeat(yposList, 65) # repeat for 60 gist images&amp;#10;ypos = np.ndarray.tolist(yposRep) # change objecttype to use with pop&amp;#10;shuffle(ypos) # randomise order &amp;#10;&amp;#10;#setup velocities for objects&amp;#10;xvelRand = np.random.rand(190) # (2+3+4) obj x 20 trials&amp;#10;xvelWiden = xvelRand*0.5+0.7 # maak snelheden tussen 0.5 en 1.2&amp;#10;xvelList = np.ndarray.tolist(xvelWiden) # change objecttype to use pop&amp;#10;&amp;#10;#setup random gisttimes&amp;#10;gistTimeRand = np.random.rand(60) # 60 trials&amp;#10;gistTimeWiden = gistTimeRand*1.5+4 # gist tijd tussen 4 en 5.5 sec&amp;#10;gistTimeList = np.ndarray.tolist(gistTimeWiden) # use with pop&amp;#10;&amp;#10;#setup random directions for objects&amp;#10;directionRand = np.random.random_integers(0, 1, size = 190) # 9 obj x 20 trials&amp;#10;directionWiden = directionRand*2-1 # discrete waarden -1 of 1&amp;#10;directionList = np.ndarray.tolist(directionWiden) # use with pop&amp;#10;&amp;#10;#setup frames for x/y-sinus&amp;#10;yRange = np.arange(0.0, 800) # 60 fps, 6 sec = 360 frames. 720 frames voor 120fps.&amp;#10;yFramerate = yRange/30&amp;#10;xFramerate = yRange/60&amp;#10;&amp;#10;#setup random order for gists across conditions&amp;#10;rowAr = np.arange(80) # 80 fotos&amp;#10;rowList = np.ndarray.tolist(rowAr)&amp;#10;shuffle(rowList) # random volgorde&amp;#10;&amp;#10;" valType="extendedCode"/>
         <Param name="name" updates="None" val="code" valType="code"/>
         <Param name="Begin Routine" updates="constant" val="# pop random speeds&amp;#10;xvel1 = xvelList.pop()&amp;#10;xvel2 = xvelList.pop()&amp;#10;# pop random timing&amp;#10;gistTime = gistTimeList.pop()&amp;#10;# pop random direction&amp;#10;dir1 = directionList.pop()&amp;#10;dir2 = directionList.pop()&amp;#10;&amp;#10;# stationary 30 frames&amp;#10;apndx = np.repeat(150, 30)&amp;#10;apndy = np.repeat(0, 30)&amp;#10;# create (co)sin waves&amp;#10;ySin1o = 50*np.sin(yFramerate*np.pi*(xvel1/2)) # make (co)sin&amp;#10;ySin1r = ySin1o[::-1] # reverse direction to start with 1 or 0&amp;#10;ySin1 = np.ndarray.tolist(np.append(ySin1r, apndy)) # append stationary&amp;#10;ySin2o = 50*np.sin(yFramerate*np.pi*(xvel2/2))&amp;#10;ySin2r = ySin2o[::-1]&amp;#10;ySin2 = np.ndarray.tolist(np.append(ySin2r, apndy))&amp;#10;xCos1o = dir1*150*np.cos(xFramerate*np.pi*xvel2)&amp;#10;xCos1r = xCos1o[::-1]&amp;#10;xCos1 = np.ndarray.tolist(np.append(xCos1r, (apndx*dir1)))&amp;#10;xCos2o = dir2*150*np.cos(xFramerate*np.pi*xvel1)&amp;#10;xCos2r = xCos2o[::-1]&amp;#10;xCos2 = np.ndarray.tolist(np.append(xCos2r, (apndx*dir2)))&amp;#10;&amp;#10;# setup Objectcount&amp;#10;obj2_1Count = 0&amp;#10;obj2_2Count = 0&amp;#10;&amp;#10;switch2_1 = 0 #setup switch for counting&amp;#10;switch2_2 = 0&amp;#10;&amp;#10;cond1 = rowCond1Full.pop()&amp;#10;rowCond1 = slice(cond1, cond1+1)" valType="extendedCode"/>
         <Param name="End Routine" updates="constant" val="trials_2.addData('obj2_1Count', obj2_1Count)&amp;#10;trials_2.addData('obj2_2Count', obj2_2Count)" valType="extendedCode"/>
         <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Each Frame" updates="constant" val="if (polygon.pos[0] &lt; 8) and (polygon.pos[0] &gt; -8):&amp;#10;  switch2_1Mem = switch2_1&amp;#10;  switch2_1 = 1&amp;#10;  if switch2_1Mem == 0:&amp;#10;    obj2_1Count +=1&amp;#10;else:&amp;#10;  switch2_1 = 0&amp;#10;&amp;#10;if (polygon_2.pos[0] &lt; 8) and (polygon_2.pos[0] &gt; -8):&amp;#10;  switch2_2Mem = switch2_2&amp;#10;  switch2_2 = 1&amp;#10;  if switch2_2Mem == 0:&amp;#10;    obj2_2Count +=1&amp;#10;else:&amp;#10;  switch2_2 = 0" valType="extendedCode"/>
       </CodeComponent>
-      <RatingScaleComponent name="ratingMV">
+      <RatingScaleComponent name="ratingMV2_">
         <Param name="labels" updates="constant" val="" valType="str"/>
         <Param name="pos" updates="constant" val="0, 0.5" valType="str"/>
         <Param name="high" updates="constant" val="1" valType="code"/>
@@ -446,18 +446,18 @@
         <Param name="stopType" updates="None" val="condition" valType="str"/>
         <Param name="scaleDescription" updates="constant" val="" valType="str"/>
         <Param name="storeHistory" updates="constant" val="False" valType="bool"/>
-        <Param name="categoryChoices" updates="constant" val="'man', 'vrouw'" valType="str"/>
+        <Param name="categoryChoices" updates="constant" val="'man', 'geen foto gezien', 'vrouw'" valType="str"/>
         <Param name="customize_everything" updates="constant" val="" valType="str"/>
-        <Param name="name" updates="None" val="ratingMV" valType="code"/>
+        <Param name="name" updates="None" val="ratingMV2_" valType="code"/>
         <Param name="singleClick" updates="constant" val="False" valType="bool"/>
       </RatingScaleComponent>
-      <RatingScaleComponent name="rating2">
+      <RatingScaleComponent name="rating2_">
         <Param name="labels" updates="constant" val="'1','10','20'" valType="str"/>
         <Param name="pos" updates="constant" val="0, -0.4" valType="str"/>
         <Param name="high" updates="constant" val="20" valType="code"/>
         <Param name="storeRating" updates="constant" val="True" valType="bool"/>
         <Param name="marker" updates="constant" val="triangle" valType="str"/>
-        <Param name="startVal" updates="None" val="$ratingMV.status==FINISHED" valType="code"/>
+        <Param name="startVal" updates="None" val="$ratingMV2_.status==FINISHED" valType="code"/>
         <Param name="markerStart" updates="constant" val="10" valType="str"/>
         <Param name="disappear" updates="constant" val="True" valType="bool"/>
         <Param name="size" updates="constant" val="1.0" valType="code"/>
@@ -476,7 +476,7 @@
         <Param name="storeHistory" updates="constant" val="False" valType="bool"/>
         <Param name="categoryChoices" updates="constant" val="" valType="str"/>
         <Param name="customize_everything" updates="constant" val="" valType="str"/>
-        <Param name="name" updates="None" val="rating2" valType="code"/>
+        <Param name="name" updates="None" val="rating2_" valType="code"/>
         <Param name="singleClick" updates="constant" val="False" valType="bool"/>
       </RatingScaleComponent>
     </Routine>
@@ -699,7 +699,7 @@
     <Routine name="demografische_info">
       <RatingScaleComponent name="leeftijd">
         <Param name="labels" updates="constant" val="'17', '60'" valType="str"/>
-        <Param name="pos" updates="constant" val="0, -0.4" valType="str"/>
+        <Param name="pos" updates="constant" val="0, 0" valType="str"/>
         <Param name="high" updates="constant" val="60" valType="code"/>
         <Param name="storeRating" updates="constant" val="True" valType="bool"/>
         <Param name="marker" updates="constant" val="triangle" valType="str"/>
@@ -709,7 +709,7 @@
         <Param name="size" updates="constant" val="1.0" valType="code"/>
         <Param name="tickHeight" updates="constant" val="" valType="str"/>
         <Param name="showAccept" updates="constant" val="True" valType="bool"/>
-        <Param name="storeRatingTime" updates="constant" val="True" valType="bool"/>
+        <Param name="storeRatingTime" updates="constant" val="False" valType="bool"/>
         <Param name="forceEndRoutine" updates="constant" val="True" valType="bool"/>
         <Param name="low" updates="constant" val="17" valType="code"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
@@ -741,6 +741,26 @@
         <Param name="store" updates="constant" val="last key" valType="str"/>
         <Param name="syncScreenRefresh" updates="constant" val="True" valType="bool"/>
       </KeyboardComponent>
+      <TextComponent name="text_6">
+        <Param name="opacity" updates="constant" val="1" valType="code"/>
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="name" updates="None" val="text_6" valType="code"/>
+        <Param name="wrapWidth" updates="constant" val="" valType="code"/>
+        <Param name="color" updates="constant" val="white" valType="str"/>
+        <Param name="text" updates="constant" val="druk een toets om naar het volgende scherm te gaan." valType="str"/>
+        <Param name="stopVal" updates="constant" val="" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="pos" updates="constant" val="(0, -0.5)" valType="code"/>
+        <Param name="flip" updates="constant" val="" valType="str"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="units" updates="None" val="from exp settings" valType="str"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="ori" updates="constant" val="0" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="font" updates="constant" val="Arial" valType="str"/>
+        <Param name="letterHeight" updates="constant" val="0.05" valType="code"/>
+      </TextComponent>
     </Routine>
     <Routine name="obj4_">
       <ImageComponent name="image_3">
@@ -753,7 +773,7 @@
         <Param name="stopVal" updates="constant" val="0.030" valType="code"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="mask" updates="constant" val="None" valType="str"/>
-        <Param name="pos" updates="set every repeat" val="[xpos.pop(), xpos.pop()]" valType="code"/>
+        <Param name="pos" updates="set every repeat" val="[xpos.pop(), ypos.pop()]" valType="code"/>
         <Param name="interpolate" updates="constant" val="linear" valType="str"/>
         <Param name="startEstim" updates="None" val="" valType="code"/>
         <Param name="units" updates="None" val="pix" valType="str"/>
@@ -878,7 +898,7 @@
         <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Each Frame" updates="constant" val="# count objects over red line area&amp;#10;if (polygon_8.pos[0] &lt; 8) and (polygon_8.pos[0] &gt; -8):&amp;#10;  switch4_1Mem = switch4_1&amp;#10;  switch4_1 = 1&amp;#10;  if switch4_1Mem == 0:&amp;#10;    obj4_1Count +=1&amp;#10;else:&amp;#10;  switch4_1 = 0&amp;#10;if (polygon_9.pos[0] &lt; 8) and (polygon_9.pos[0] &gt; -8):&amp;#10;  switch4_2Mem = switch4_2&amp;#10;  switch4_2 = 1&amp;#10;  if switch4_2Mem == 0:&amp;#10;    obj4_2Count +=1&amp;#10;else:&amp;#10;  switch4_2 = 0&amp;#10;if (polygon_12.pos[0] &lt; 8) and (polygon_12.pos[0] &gt; -8):&amp;#10;  switch4_3Mem = switch4_3&amp;#10;  switch4_3 = 1&amp;#10;  if switch4_3Mem == 0:&amp;#10;    obj4_3Count +=1&amp;#10;else:&amp;#10;  switch4_3 = 0&amp;#10;if (polygon_13.pos[0] &lt; 8) and (polygon_13.pos[0] &gt; -8):&amp;#10;  switch4_4Mem = switch4_4&amp;#10;  switch4_4 = 1&amp;#10;  if switch4_4Mem == 0:&amp;#10;    obj4_4Count +=1&amp;#10;else:&amp;#10;  switch4_4 = 0" valType="extendedCode"/>
       </CodeComponent>
-      <RatingScaleComponent name="ratingMV_2">
+      <RatingScaleComponent name="ratingMV4_">
         <Param name="labels" updates="constant" val="" valType="str"/>
         <Param name="pos" updates="constant" val="0, 0.5" valType="str"/>
         <Param name="high" updates="constant" val="1" valType="code"/>
@@ -901,18 +921,18 @@
         <Param name="stopType" updates="None" val="condition" valType="str"/>
         <Param name="scaleDescription" updates="constant" val="" valType="str"/>
         <Param name="storeHistory" updates="constant" val="False" valType="bool"/>
-        <Param name="categoryChoices" updates="constant" val="'man', 'vrouw'" valType="str"/>
+        <Param name="categoryChoices" updates="constant" val="'man', 'geen foto gezien', 'vrouw'" valType="str"/>
         <Param name="customize_everything" updates="constant" val="" valType="str"/>
-        <Param name="name" updates="None" val="ratingMV_2" valType="code"/>
+        <Param name="name" updates="None" val="ratingMV4_" valType="code"/>
         <Param name="singleClick" updates="constant" val="False" valType="bool"/>
       </RatingScaleComponent>
-      <RatingScaleComponent name="rating2_2">
+      <RatingScaleComponent name="rating4_">
         <Param name="labels" updates="constant" val="'1','20'" valType="str"/>
         <Param name="pos" updates="constant" val="0, -0.4" valType="str"/>
         <Param name="high" updates="constant" val="20" valType="code"/>
         <Param name="storeRating" updates="constant" val="True" valType="bool"/>
         <Param name="marker" updates="constant" val="triangle" valType="str"/>
-        <Param name="startVal" updates="None" val="$ratingMV_2.status==FINISHED" valType="code"/>
+        <Param name="startVal" updates="None" val="$ratingMV4_.status==FINISHED" valType="code"/>
         <Param name="markerStart" updates="constant" val="10" valType="str"/>
         <Param name="disappear" updates="constant" val="False" valType="bool"/>
         <Param name="size" updates="constant" val="1.0" valType="code"/>
@@ -931,7 +951,7 @@
         <Param name="storeHistory" updates="constant" val="False" valType="bool"/>
         <Param name="categoryChoices" updates="constant" val="" valType="str"/>
         <Param name="customize_everything" updates="constant" val="" valType="str"/>
-        <Param name="name" updates="None" val="rating2_2" valType="code"/>
+        <Param name="name" updates="None" val="rating4_" valType="code"/>
         <Param name="singleClick" updates="constant" val="False" valType="bool"/>
       </RatingScaleComponent>
     </Routine>
@@ -942,7 +962,7 @@
         <Param name="name" updates="None" val="text" valType="code"/>
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
         <Param name="color" updates="constant" val="white" valType="str"/>
-        <Param name="text" updates="constant" val="Je hebt nu tegelijkertijd twee taken:&amp;#10;&amp;#10;Taak 1:&amp;#10;Tel hoe vaak er in totaal een blauwe balletje &amp;#10;over de rode lijn gaat.&amp;#10;&amp;#10;Focus je blik op de rode lijn, niet op de balletjes.&amp;#10;&amp;#10;Taak 2:&amp;#10;Is de foto een man of een vrouw?" valType="str"/>
+        <Param name="text" updates="constant" val="Je hebt nu tegelijkertijd twee taken:&amp;#10;&amp;#10;Taak 1:&amp;#10;Tel hoe vaak er in totaal een blauw balletje &amp;#10;over de rode lijn gaat. Elk balletje wordt apart geteld.&amp;#10;&amp;#10;Focus je blik op de rode lijn, niet op de balletjes.&amp;#10;&amp;#10;Taak 2:&amp;#10;Is de foto een man of een vrouw?" valType="str"/>
         <Param name="stopVal" updates="constant" val="" valType="code"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="pos" updates="constant" val="(-0.5, 0)" valType="code"/>
@@ -1002,7 +1022,7 @@
         <Param name="name" updates="None" val="text_3" valType="code"/>
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
         <Param name="color" updates="constant" val="white" valType="str"/>
-        <Param name="text" updates="constant" val="Raporteer man of vrouw door op&amp;#10;het uiteinde van de lijn te klikken." valType="str"/>
+        <Param name="text" updates="constant" val="De test stopt na 6 seconden.&amp;#10;Raporteer man of vrouw door op&amp;#10;het uiteinde van de lijn te klikken." valType="str"/>
         <Param name="stopVal" updates="constant" val="" valType="code"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="pos" updates="constant" val="(-0.5, 0.3)" valType="code"/>
@@ -1060,7 +1080,7 @@
         <Param name="name" updates="None" val="text_5" valType="code"/>
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
         <Param name="color" updates="constant" val="white" valType="str"/>
-        <Param name="text" updates="constant" val="Raporteer het totaal aantal keer dat de&amp;#10;balletjes de lijn hebben gekruist&amp;#10;door op de getallenlijn het juiste aantal &amp;#10;te selecteren.&amp;#10;&amp;#10;Druk nu een toets om de test te starten." valType="str"/>
+        <Param name="text" updates="constant" val="Raporteer het totaal aantal keer dat de&amp;#10;balletjes de lijn hebben gekruist&amp;#10;door op de getallenlijn het juiste aantal &amp;#10;te selecteren.&amp;#10;&amp;#10;Er zijn 60 tests, van elk 6 seconden.&amp;#10;Het totale experiment duurt iets minder dan 10 minuten.&amp;#10;&amp;#10;Klaar? Druk nu een toets om de test te starten.&amp;#10;" valType="str"/>
         <Param name="stopVal" updates="constant" val="" valType="code"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="pos" updates="constant" val="(-0.5, -0.3)" valType="code"/>
@@ -1074,6 +1094,14 @@
         <Param name="font" updates="constant" val="Arial" valType="str"/>
         <Param name="letterHeight" updates="constant" val="0.05" valType="code"/>
       </TextComponent>
+      <CodeComponent name="code_7">
+        <Param name="Begin Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="name" updates="None" val="code_7" valType="code"/>
+        <Param name="Begin Routine" updates="constant" val="# selecteer 21 random fotos voor elke conditie&amp;#10;rowCond1Full = rowList[0:25] &amp;#10;rowCond2Full = rowList[26:52]&amp;#10;rowCond3Full = rowList[53:79]&amp;#10;&amp;#10;cond1 = rowCond1Full.pop()&amp;#10;rowCond1 = slice(cond1, cond1+1)&amp;#10;&amp;#10;# random conditions&amp;#10;cond2 = rowCond2Full.pop()&amp;#10;rowCond2 = slice(cond2, cond2+1)&amp;#10;&amp;#10;cond3 = rowCond3Full.pop()&amp;#10;rowCond3 = slice(cond3, cond3+1)" valType="extendedCode"/>
+        <Param name="End Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Each Frame" updates="constant" val="" valType="extendedCode"/>
+      </CodeComponent>
     </Routine>
     <Routine name="instructies_3">
       <ImageComponent name="image_8">
@@ -1104,7 +1132,7 @@
         <Param name="name" updates="None" val="text_4" valType="code"/>
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
         <Param name="color" updates="constant" val="white" valType="str"/>
-        <Param name="text" updates="constant" val="Zeer kortdurend verschijnt er in een van de &amp;#10;vier hoeken een foto van een man of vrouw." valType="str"/>
+        <Param name="text" updates="constant" val="Zeer kortdurend verschijnt er &amp;#10;een foto van een man of vrouw in beeld." valType="str"/>
         <Param name="stopVal" updates="constant" val="" valType="code"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="pos" updates="constant" val="(-0.5, 0)" valType="code"/>
@@ -1197,8 +1225,8 @@
     </Routine>
     <Routine name="geslacht">
       <RatingScaleComponent name="manvrouw">
-        <Param name="labels" updates="constant" val="" valType="str"/>
-        <Param name="pos" updates="constant" val="0, -0.4" valType="str"/>
+        <Param name="labels" updates="constant" val="'vrouw','man'" valType="str"/>
+        <Param name="pos" updates="constant" val="0, 0" valType="str"/>
         <Param name="high" updates="constant" val="1" valType="code"/>
         <Param name="storeRating" updates="constant" val="True" valType="bool"/>
         <Param name="marker" updates="constant" val="triangle" valType="str"/>
@@ -1208,7 +1236,7 @@
         <Param name="size" updates="constant" val="1.0" valType="code"/>
         <Param name="tickHeight" updates="constant" val="" valType="str"/>
         <Param name="showAccept" updates="constant" val="True" valType="bool"/>
-        <Param name="storeRatingTime" updates="constant" val="True" valType="bool"/>
+        <Param name="storeRatingTime" updates="constant" val="False" valType="bool"/>
         <Param name="forceEndRoutine" updates="constant" val="True" valType="bool"/>
         <Param name="low" updates="constant" val="0" valType="code"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
@@ -1219,7 +1247,7 @@
         <Param name="stopType" updates="None" val="condition" valType="str"/>
         <Param name="scaleDescription" updates="constant" val="Ben je man of vrouw?" valType="str"/>
         <Param name="storeHistory" updates="constant" val="False" valType="bool"/>
-        <Param name="categoryChoices" updates="constant" val="'vrouw', 'man'" valType="str"/>
+        <Param name="categoryChoices" updates="constant" val="" valType="str"/>
         <Param name="customize_everything" updates="constant" val="" valType="str"/>
         <Param name="name" updates="None" val="manvrouw" valType="code"/>
         <Param name="singleClick" updates="constant" val="False" valType="bool"/>
@@ -1240,6 +1268,14 @@
         <Param name="store" updates="constant" val="last key" valType="str"/>
         <Param name="syncScreenRefresh" updates="constant" val="True" valType="bool"/>
       </KeyboardComponent>
+      <CodeComponent name="code_2">
+        <Param name="Begin Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="name" updates="None" val="code_2" valType="code"/>
+        <Param name="Begin Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Each Frame" updates="constant" val="" valType="extendedCode"/>
+      </CodeComponent>
     </Routine>
   </Routines>
   <Flow>
@@ -1255,7 +1291,7 @@
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="random seed" updates="None" val="" valType="code"/>
       <Param name="loopType" updates="None" val="sequential" valType="str"/>
-      <Param name="nReps" updates="None" val="3" valType="code"/>
+      <Param name="nReps" updates="None" val="20" valType="code"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
       <Param name="conditions" updates="None" val="None" valType="str"/>
       <Param name="Selected rows" updates="None" val="" valType="str"/>

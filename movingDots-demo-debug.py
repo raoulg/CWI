@@ -750,8 +750,8 @@ continueRoutine = True
 key_resp_intro = event.BuilderKeyResponse()
 # selecteer 21 random fotos voor elke conditie
 rowCond1Full = rowList[0:25] 
-rowCond2Full = rowList[26:46]
-rowCond3Full = rowList[47:67]
+rowCond2Full = rowList[26:52]
+rowCond3Full = rowList[53:79]
 print(rowCond1Full)
 debug += 1
 print(debug)
