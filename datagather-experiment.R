@@ -3,51 +3,80 @@ library(stringr)
 setwd("~/Dropbox/KI/ICW/werkgroep/code/CWI/data/")
 # readfolder function
 ReadFolder <- function(infolder) {
-  data_frame(file = dir(infolder, full.names = TRUE)) 
+  data_frame(file = dir(infolder, full.names = TRUE)) # geef namen files in dir
 }
-# read all datafiles, filter conditie 2
-datafiles_2 <- ReadFolder('.') %>% # read filenames
-  filter(str_detect(file, "2.csv")) 
+# read all datafilenames, filter juiste csv
+datafiles <- ReadFolder('.') %>% 
+  filter(str_detect(file, ".csv")) %>%
+  filter(!str_detect(file, "trials"))
 
-frame_2 <- data_frame() # import csv
-for (x in (1:dim(datafiles_2)[1])){
-  frame_2 <- rbind(frame_2, read_csv(toString(datafiles_2[x,1])))
+matrix <- data_frame() # gebruik alle filenames voor csv import
+for (x in (1:dim(datafiles)[1])){
+  matrix <- rbind(matrix, read_csv(toString(datafiles[x,1])))
 }
 
-names <- frame_2 %>%
-  filter(imgName == 'participant') %>%
-  select(name = corrAns)
+# selecteer demografische info, verwijder NA
+names <- matrix %>%
+  select(leeftijd.response, manvrouw.response, participant) %>%
+  gather("var", "val", -participant) %>%
+  filter(is.na(val) == FALSE) %>%
+  spread(key = "var", value = "val")
 
-frame_2_select <- frame_2 %>% # select usefull data
-  filter((corrAns == 'v') | (corrAns == 'm')) %>% # strip noise
-  select(imgName, corrAns, obj2_1Count_raw, obj2_2Count_raw,
-         rating2_.response_raw, ratingMV2_.response_raw) %>%
-  cbind(names) # bind names
+# maak matrix van alle bruikbare observaties
+matrixObservations <- matrix %>% 
+  select(imgName, corrAns, trials.thisRepN,
+         obj2_1Count, obj2_2Count, ratingMV2_.response, rating2_.response,
+         obj3_1Count, obj3_2Count, obj3_3Count, 
+         ratingMV3_.response, rating3_.response,
+         obj4_1Count, obj4_2Count, obj4_3Count, obj4_4Count,
+         ratingMV4_.response, rating4_.response,
+         date, participant) %>%
+  mutate(cond = # voeg conditie toe (2,3,4 objecten)
+           (is.na(obj2_1Count) == FALSE)*2 + 
+           (is.na(obj3_1Count) == FALSE)*3 +
+           (is.na(obj4_1Count) == FALSE)*4
+  ) %>%
+  filter(cond != 0)
 
-# selecteer alle demografie van participanten
-demog <- md %>%
-  select(manvrouw.response, date, participant) %>%
-  filter(is.na(manvrouw.response) == FALSE )
-age <- md %>%
-  select(leeftijd.response, date) %>%
-  filter(is.na(leeftijd.response) == FALSE )
-participants <- left_join(demog, age, by = "date")
+# replace NA with 0
+matrixObservations[is.na(matrixObservations)] <- 0
 
-trial <- m %>%
-  mutate(corrCount = obj4_1Count + obj4_2Count + obj4_3Count + obj4_4Count) %>%
-  select(imgName, corrAns, ratingMV_2.response, 
-         corrCount, rating2_2.response, rating_3.response, date) %>%
-  filter(is.na(imgName) == FALSE )
+# bewerk data zodat matrix geschikt wordt voor plotting
+matrixProcessed <- matrixObservations %>%
+  mutate(MVResp = # beoordeel input
+           ((corrAns == "v") & (ratingMV2_.response == "'vrouw'"))*1 +
+           ((corrAns == "m") & (ratingMV2_.response == "'man'"))*1 +
+           ((corrAns == "v") & (ratingMV3_.response == "'vrouw'"))*1 +
+           ((corrAns == "m") & (ratingMV3_.response == "'man'"))*1 +
+           ((corrAns == "v") & (ratingMV4_.response == "'vrouw'"))*1 +
+           ((corrAns == "m") & (ratingMV4_.response == "'man'"))*1 
+  ) %>%
+  mutate(noConsc = # no consciousness
+           (ratingMV2_.response == "'geen foto gezien'")*1 +
+           (ratingMV3_.response == "'geen foto gezien'")*1 +
+           (ratingMV4_.response == "'geen foto gezien'")*1) %>%
+  mutate(ObjCorr = # correct aantal objecten
+           obj4_1Count + obj4_2Count + obj4_3Count + obj4_4Count +
+           obj3_1Count + obj3_2Count + obj3_3Count +
+           obj2_1Count + obj2_2Count) %>%
+  transmute(imgName, MVCorr = corrAns, MVResp, noConsc, ObjCorr, ObjResp = 
+           rating2_.response + rating3_.response + rating4_.response, 
+           repN = trials.thisRepN, cond, participant) %>% # verwijder onnodige info
+  mutate(ObjError = (ObjResp-ObjCorr)/ObjCorr ) %>%
+  left_join(names, by = "participant") # voeg demografie toe
 
-data <- left_join(trial, participants, by = "date") %>%
-  mutate(errorcount = (rating2_2.response-corrCount)/corrCount) %>%
-  cbind(seq = 1:8)
+matrixProcessed$cond <- as.factor(matrixProcessed$cond)
+matrixStat <- matrixProcessed %>%
+  group_by(participant) %>% 
+  arrange(cond)
 
-data$errorMV <- ifelse(
-  ((data$corrAns == 'v') & (data$ratingMV_2.response == "'vrouw'")) |
-    ((data$corrAns == 'm') & (data$ratingMV_2.response == "'man'"))
-  , 1, 0)
+ggplot(data = matrixStat) +
+  geom_jitter(mapping = aes(x = repN, y = ObjError, color = cond, alpha = 0.1)) 
 
+ggplot(data = matrixStat) +
+#######
+
+#######
 ggplot(data = data) +
   geom_smooth(method = "glm", aes(x = seq, y = errorcount, color = "lineaire regressie")) +
   geom_point(mapping = aes(x = seq, y = errorcount, color = date))
@@ -60,3 +89,5 @@ ggplot(data = data) +
 ggplot(data = data) +
   geom_smooth(method = "glm", aes(x = seq, y = errorcount, color = "lineaire regressie")) +
   geom_smooth(method = "glm", aes(x = seq, y = errorMV))
+
+
