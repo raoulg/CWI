@@ -15,7 +15,7 @@ a <- read_csv(toString(datafiles[2, 1]))
 a <- a %>%
   mutate(leeftijd.response = as.integer(NA)) %>%
   mutate(manvrouw.response = as.integer(NA))
-a[1, 19] <- 10 # dummyleeftijd
+a[1, 19] <- 20 # leeftijd
 a[3, 22] <- 0
 datafiles <- datafiles[-2,]
 
@@ -23,7 +23,7 @@ b <- read_csv(toString(datafiles[5, 1]))
 b <- b %>%
   mutate(leeftijd.response = as.integer(NA)) %>%
   mutate(manvrouw.response = as.integer(NA))
-b[1, 19] <- 10 # dummyleeftijd
+b[1, 19] <- 20 # leeftijd
 b[3, 22] <- 0
 datafiles <- datafiles[-5,]
 
@@ -59,6 +59,7 @@ matrixObservations <- matrix %>%
   filter(cond != 0)
 
 # replace NA with 0
+
 matrixObservations[is.na(matrixObservations)] <- 0
 
 # bewerk data zodat matrix geschikt wordt voor plotting
@@ -85,6 +86,7 @@ matrixProcessed <- matrixObservations %>%
   mutate(ObjError = 1- abs((ObjResp - ObjCorr) / ObjCorr )) %>%
   left_join(names, by = "participant") # voeg demografie toe
 
+
 # groepeer op conditie
 matrixProcessed$cond <- as.integer(matrixProcessed$cond)
 matrixStat <- matrixProcessed %>%
@@ -104,13 +106,21 @@ matrixStatEr <- matrixStat %>%
   group_by(participant, cond) %>%
   mutate(gistError = mean(MVResp), ObjError = mean(ObjError))
 
+matrixStat <- matrixStat %>%
+  ungroup() %>%
+  arrange(ObjError)
+
+
+
+############ ANALYSES ###############
 # t.test
 t.test(matrixSum$cond, matrixSum$gistError)
 
 # lineaire regressie
 fit <- lm(gistError ~ cond, data = matrixSum)
 coefficients(fit)
-summary(fit)
+summary(fit) 
+# p-value is 0.85.... dus geen goed model!
 anova(fit)
 
 # jitterpoint van gemiddeldes plus lm
@@ -140,8 +150,21 @@ ggplot(data = matrixSum, aes(x = cond, y = gistError)) +
   stat_smooth(method = "auto", fullrange = TRUE) +
   facet_wrap(~ participant)
 
+# met auto
+formula = y ~ poly(x, 2)
 ggplot(data = matrixSum, aes(x = cond, y = gistError)) +
-  stat_smooth(method = "auto", fullrange = TRUE)
+  stat_smooth(method = 'lm', formula = formula, fullrange = TRUE) +
+  stat_fit_glance(method = 'lm',
+                  method.args = list(formula = formula),
+                  geom = 'text',
+                  aes(label = paste("P-value = ", signif(..p.value.., digits = 4), sep = "")),
+                  label.x.npc = 'right', label.y.npc = 0.35, size = 3)
+
+# met y ~ poly(x, 2)
+formula = y ~ poly(x, 2)
+ggplot(data = matrixSum, aes(x = cond, y = gistError)) +
+  stat_smooth(method = "auto", formula = formula, fullrange = TRUE)
+
 
 # alle lm over elkaar geplot
 ggplot(data = matrixSum, aes(x = cond, y = gistError, color = participant)) +
@@ -157,7 +180,9 @@ ggplot(data = matrixProcessed, aes(x = repN, y = ObjError)) +
   facet_wrap(~cond)
 
 ggplot(data = matrixStat) +
-  geom_jitter(mapping = aes(x = repN, y = ObjError, color = cond, alpha = 0.1))
+  geom_jitter(mapping = aes(x = repN, y = ObjError, color = cond, alpha = 0.1)) +
+  facet_wrap(~cond)
+
 
 ggplot(data = matrixSum, aes(x = cond, y = gistError, color = participant)) +
   geom_smooth() +
