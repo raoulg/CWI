@@ -1,3 +1,4 @@
 /data
 ~$conditions.xlsx
 *_lastrun.py
+.Rproj.user
