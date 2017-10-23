@@ -45,6 +45,25 @@ data$errorMV <- ifelse(
     ((data$corrAns == 'm') & (data$ratingMV_2.response == "'man'"))
   , 1, 0)
 
+a <- as.tibble(rep(seq(0.5, 1.2, 0.1),6))
+datas <- bind_cols(data, a)
+ggplot(datas) +
+  geom_boxplot(mapping = aes(x = value, y = rating_3.response, group = seq))
+
+
+MinMeanSEMMax <- function(x) {
+  v <- c(min(x), mean(x) - sd(x)/sqrt(length(x)), mean(x), mean(x) + sd(x)/sqrt(length(x)), max(x))
+  names(v) <- c("ymin", "lower", "middle", "upper", "ymax")
+  v
+}
+pdf(file = "boxplot-snelheidstest.pdf")
+ggplot(datas, mapping = aes(x = value, y = rating_3.response, group = seq)) +
+  stat_summary(fun.data=MinMeanSEMMax, geom="boxplot") +
+  labs(title = "Snelheidstest", 
+       subtitle = "Waardering van snelheden met 4 objecten",
+       x = 'relatieve snelheid objecten',
+       y = 'beoordeling snelheid op vijfpunts-likertscale')
+dev.off()
 ggplot(data = data) +
   geom_smooth(method = "glm", aes(x = seq, y = errorcount, color = "lineaire regressie")) +
   geom_point(mapping = aes(x = seq, y = errorcount, color = date))
@@ -57,3 +76,4 @@ ggplot(data = data) +
 ggplot(data = data) +
   geom_smooth(method = "glm", aes(x = seq, y = errorcount, color = "lineaire regressie")) +
   geom_smooth(method = "glm", aes(x = seq, y = errorMV))
+
