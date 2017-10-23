@@ -1,0 +1,89 @@
+% run once: *latex mal-poster-output.tex
+\batchmode % Rather silent mode...
+% I am a butcher, I'll slice your pdf file into pieces... ;-)
+% ... and we will get a series of A4 papers...
+
+% Basic settings for user...
+\def\malfile{posterpresentatie.pdf} % name of the file
+\def\malpage{1} % page in pdf file to be cut
+\def\xmal{4} % number of cuts (x-axis), >1
+\def\ymal{4} % number of cuts (y-axis), >1
+\def\malscale{0.92} % postcut scaling (1.0 = no change; 0.92 common change)
+
+% This file will be processed...
+% Sort of hacking before \documentclass...
+\makeatletter\input{graphicx.sty}\makeatother
+\newbox\malbox
+\setbox\malbox=\hbox{\includegraphics[page=\malpage]{\malfile}}
+\ifnum\wd\malbox<\ht\malbox
+  \def\malpaper{portrait}
+\else
+  \def\malpaper{landscape}
+\fi
+\documentclass[a4paper,\malpaper]{article}
+\pagestyle{empty}
+% Want to change the size? Uncomment and modify the following two lines...
+%\paperwidth=21mm%
+%\paperheight=29.7mm%
+\pdfpagewidth=\paperwidth
+\pdfpageheight=\paperheight
+\usepackage{tikz}
+% I am setting these two parameters right now before I forget to do that.
+\tikzset{inner sep=0pt, outer sep=0pt}
+\usetikzlibrary{calc}
+% For intermediate+ TeXists... we can set a lot of things here...
+\tikzset{pagestyle/.style={draw=none,line width=0.01\paperwidth}}% or draw=none, draw=blue; common setting is draw=none
+% opacity=50, it is not needed as rectangle is drawn first
+
+\begin{document}
+% ...Setting dimensions part...
+% Dimensions related to the x-axis; \paperwidth (in pt)...
+\pgfmathparse{\wd\malbox/\xmal}
+\let\realx=\pgfmathresult
+\pgfmathparse{2*\realx}
+\let\secondx=\pgfmathresult
+\pgfmathparse{\wd\malbox}
+\let\lastinx=\pgfmathresult
+% Dimensions related to the y-axis; \paperheight (in pt)...
+\pgfmathparse{\ht\malbox/\ymal}
+\let\realy=\pgfmathresult
+\pgfmathparse{\ht\malbox-\realy}
+\let\beforelasty=\pgfmathresult
+\pgfmathparse{\ht\malbox}
+\let\lastiny=\pgfmathresult
+
+% ...The main part...
+% Cycle from top to bottom...
+\foreach \y in {\lastiny,\beforelasty,...,\realy} {%
+% Cycle from left to right side...
+  \foreach \x in {\realx,\secondx,...,\lastinx} {%
+    % The core of this TeX file...
+    \newpage % One cut shown on one page...
+    % Computation of the opposite corner...
+    \pgfmathparse{\x-\realx}
+    \let\previousx=\pgfmathresult
+    \pgfmathparse{\y-\realy}
+    \let\previousy=\pgfmathresult
+    % Page number is... \thepage, therefore none computation is needed... :-)
+    % Message to the terminal...
+    \scrollmode % Write me something...
+    \message{Processing page \thepage: \previousx, \previousy, \x, \y}%
+    \batchmode % And go back to the silent mode...
+    % Show me that part of the pdf file, give me some fancy drawing...
+    % First: go to the left upper corner and then jump in the center of the page...
+    \pgfmathparse{1in+\oddsidemargin+\parindent-0.5\paperwidth}% left-right direction
+    \let\movemex=\pgfmathresult
+    \pgfmathparse{1in+\topmargin+\headheight+\headsep+\the\fontdimen6\font-0.5\paperheight}%
+    % up-down direction; or \baselineskip-2pt
+    \let\movemey=\pgfmathresult
+    % For more information and experiments of yours, please see the layouts package:
+    % http://ctan.org/pkg/layouts
+    % Including a portion of the pdf file into this document...
+    \begin{tikzpicture}[overlay] %no need for: remember picture ;-)
+    \node[scale=\malscale,pagestyle] at (-\movemex pt, \movemey pt) {%
+      \includegraphics[page={\malpage}, viewport={\previousx pt} {\previousy pt} {\x pt} {\y pt}, clip, width=\paperwidth]{\malfile}%
+      };% End of \node...
+    \end{tikzpicture}%
+  }% End of \x...
+}% End of \y...
+\end{document}

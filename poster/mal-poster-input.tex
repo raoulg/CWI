@@ -1,0 +1,11 @@
+% run: *latex mal-poster-input.tex
+%   let's use portrait or landscape in the class...
+%   use any paper size (and change font size accordingly), in this example we use a0...
+\documentclass[a0,portrait]{a0poster}
+\usepackage{kantlipsum}
+\parindent=2cm % indentation of the first line in the paragraph
+\begin{document}
+	\font\malfont=cmr10 at 39pt% setting up a font
+	\malfont % using the font
+	\kant[1-10]
+\end{document}

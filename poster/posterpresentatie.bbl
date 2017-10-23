@@ -1,0 +1,28 @@
+\begin{thebibliography}{}
+
+\bibitem [\protect \citeauthoryear {%
+Block%
+}{%
+Block%
+}{%
+{\protect \APACyear {2011}}%
+}]{%
+Block_2011}
+\APACinsertmetastar {%
+Block_2011}%
+\begin{APACrefauthors}%
+Block, N.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2011}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Perceptual consciousness overflows cognitive access}
+  {Perceptual consciousness overflows cognitive access}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Trends in Cognitive Sciences}{15}{12}{567–575}.
+\newblock
+\begin{APACrefDOI} \doi{10.1016/j.tics.2011.11.001} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\end{thebibliography}

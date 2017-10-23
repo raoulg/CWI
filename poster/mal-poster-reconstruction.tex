@@ -1,0 +1,18 @@
+% run: *latex mal-poster-reconstruction.tex
+\makeatletter\input{graphicx.sty}\makeatother
+\def\maloutput{mal-poster-output.pdf}
+\newbox\testbox
+\setbox\testbox=\hbox{\includegraphics{\maloutput}}
+\ifnum\wd\testbox<\ht\testbox
+  \def\orient{portrait}
+\else
+  \def\orient{landscape}
+\fi
+% use any paper size here, in this example we use a0...
+\documentclass[a0,\orient]{a0poster}
+\pdfpagewidth=\paperwidth
+\pdfpageheight=\paperheight
+\usepackage{pdfpages}
+\begin{document}
+\includepdf[pages={-},nup=4x4,frame=true]{\maloutput}
+\end{document}

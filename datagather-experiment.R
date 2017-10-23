@@ -75,10 +75,9 @@ matrixProcessed <- matrixObservations %>%
 # condition als integer voor modeleren
 matrixProcessed$cond <- as.integer(matrixProcessed$cond)
 # diverse afkappunten voor vermoeidheidseffect
-matrixProcessed20 <- matrixProcessed
 matrixProcessed15 <- matrixProcessed %>%
   filter(repN <= 15)
-matrixProcessed <- matrixProcessed %>%
+matrixProcessed10 <- matrixProcessed %>%
   filter(repN <= 10)
 
 # summarise complete matrix
@@ -87,13 +86,14 @@ matrixSum <-  matrixProcessed %>%
   summarise(gistError = mean(MVResp)*100,
             ObjError = mean(ObjError)*100)
 
-matrixSum20 <-  matrixProcessed20 %>%
+matrixSum10 <-  matrixProcessed10 %>%
   group_by(participant, cond, manvrouw.response) %>%
   summarise(gistError = mean(MVResp)*100,
             ObjError = mean(ObjError)*100)
 
-matrixProcessed20 <- matrixProcessed20 %>%
+matrixProcessed10 <- matrixProcessed10 %>%
   mutate(condition = ifelse((cond == 2), "2 objecten", 
                             ifelse((cond == 3), "3 objecten", 
                                    "4 objecten"))) %>%
   mutate(ObjError = ObjError*100)
+
