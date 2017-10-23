@@ -82,18 +82,25 @@ matrixProcessed10 <- matrixProcessed %>%
 
 # summarise complete matrix
 matrixSum <-  matrixProcessed %>%
-  group_by(participant, cond, manvrouw.response) %>%
+  group_by(participant, cond, manvrouw.response, leeftijd.response) %>%
   summarise(gistError = mean(MVResp)*100,
             ObjError = mean(ObjError)*100)
+
+matrixSum <- matrixSum %>%
+  mutate(agegroup = ifelse(leeftijd.response <= 30, "17-30 jaar", "30+ jaar"))
 
 matrixSum10 <-  matrixProcessed10 %>%
-  group_by(participant, cond, manvrouw.response) %>%
+  group_by(participant, cond, manvrouw.response, leeftijd.response) %>%
   summarise(gistError = mean(MVResp)*100,
             ObjError = mean(ObjError)*100)
 
-matrixProcessed10 <- matrixProcessed10 %>%
+matrixSum10 <- matrixSum10 %>%
+  mutate(agegroup = ifelse(leeftijd.response <= 30, "17-30 jaar", "30+ jaar"))
+
+matrixProcessed <- matrixProcessed %>%
   mutate(condition = ifelse((cond == 2), "2 objecten", 
                             ifelse((cond == 3), "3 objecten", 
                                    "4 objecten"))) %>%
-  mutate(ObjError = ObjError*100)
-
+  mutate(ObjError = ObjError*100) %>%
+  mutate(gender = ifelse(manvrouw.response == 0, "vrouw", "man")) %>%
+  mutate(agegroup = ifelse(leeftijd.response <= 30, "17-30 jaar", "30+ jaar"))

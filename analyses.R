@@ -1,60 +1,53 @@
 ############ ANALYSES ###############
 ### trainingseffect bij complete dataset
 setwd('../plots')
-pdf(file = "training-conditie.pdf")
-ggplot(data = matrixProcessed20, mapping = aes(x = repN, y = ObjError)) +
+
+ggplot(data = matrixProcessed, mapping = aes(x = repN, y = ObjError)) +
   geom_jitter(alpha = 0.1) +
-  geom_smooth(aes(colour="lineaire regressie")) +
+  geom_smooth() +
   facet_wrap(~ condition) +
-  labs(title = "Trainings- en vermoeidheidseffect", 
-       subtitle = "Verloop prestatie gistherkenning in de tijd, per conditie",
-       x = 'Volgorde van experimenten (experimentnummer)',
-       y = 'prestatie gist (percentage correct)') +
   scale_colour_manual(name="legenda", values="blue")
-dev.off()
+
 # mv verschil
-matrixProcessed20mv <- matrixProcessed20 %>%
-  mutate(gender = ifelse(manvrouw.response == 0, "vrouw", "man"))
 formula = y ~ x
-pdf(file = "training-mv.pdf")
-ggplot(data = matrixProcessed20mv, mapping = aes(x = repN, y = ObjError)) +
+o <-   labs(title = "Trainings- en vermoeidheidseffect", 
+            subtitle = "Verloop prestatie objecttelling in de tijd, per geslacht en leeftijdsgroep",
+            x = 'Volgorde van experimenten (experimentnummer)',
+            y = 'Objecttelling (percentage correct)')
+pdf(file = "training-grid.pdf")
+ggplot(data = matrixProcessed, mapping = aes(x = repN, y = ObjError)) +
   geom_jitter(alpha = 0.1) +
-  geom_smooth(formula = formula, fullrange = TRUE, aes(colour="lineaire regressie")) +
-  stat_fit_glance(method.args = list(formula = formula),
-                  geom = 'text',
-                  aes(label = paste("P-value = ", signif(..p.value.., digits = 2), sep = "")),
-                  label.x.npc = 'right', label.y.npc = 0.35, size = 3) +
-  facet_wrap(~gender) +
-  labs(title = "Trainings- en vermoeidheidseffect", 
-       subtitle = "Verloop prestatie gistherkenning in de tijd, per geslacht",
-       x = 'Volgorde van experimenten (experimentnummer)',
-       y = 'prestatie gist (percentage correct)') +
+  geom_smooth() +
+  stat_fit_glance(geom = 'text',
+                  aes(label = paste("p = ", signif(..p.value.., digits = 2), sep = "")),
+                  label.x.npc = 'right', label.y.npc = 0.05, size = 3) +
+  facet_grid(agegroup~gender) +
+  o +
   scale_colour_manual(name="legenda", values="blue")
 dev.off()
 # p-waardes
-matrixProcessed20mvM <- matrixProcessed20mv %>%
+matrixProcessed20mvM <- matrixProcessed %>%
   filter(manvrouw.response == 1) %>%
   rename(y = ObjError, x = repN)
 modelM <- lm(formula = formula, matrixProcessed20mvM)
 summary(modelM)
-matrixProcessed20mvV <- matrixProcessed20mv %>%
+matrixProcessed20mvV <- matrixProcessed %>%
   filter(manvrouw.response == 0) %>%
   rename(y = ObjError, x = repN)
 modelV <- lm(formula = formula, matrixProcessed20mvV)
 summary(modelV)
 
 # leeftijdsverschil
-pdf(file = "spredingLeeftijden.pdf")
+pdf(file = "spreidingLeeftijden.pdf")
 ggplot(data = names, aes(leeftijd.response)) +
   geom_histogram()
 dev.off()
 # toevoegen categorieen
-matrixProcessed20age <- matrixProcessed20 %>%
+matrixProcessed20age <- matrixProcessed %>%
   mutate(gender = ifelse(manvrouw.response == 0, "vrouw", "man")) %>%
   mutate(agegroup = ifelse(leeftijd.response <= 30, "17-30", "30+"))
 formula = y ~ x
-pdf(file = "training-leeftijd.pdf")
-ggplot(data = matrixProcessed20age, mapping = aes(x = repN, y = ObjError)) +
+ggplot(data = matrixProcessed, mapping = aes(x = repN, y = ObjError)) +
   geom_jitter(alpha = 0.1) +
   geom_smooth(formula = formula, fullrange = TRUE, aes(colour="lineaire regressie")) +
   stat_fit_glance(method.args = list(formula = formula),
@@ -62,42 +55,9 @@ ggplot(data = matrixProcessed20age, mapping = aes(x = repN, y = ObjError)) +
                   aes(label = paste("P-value = ", signif(..p.value.., digits = 2), sep = "")),
                   label.x.npc = 'right', label.y.npc = 0.35, size = 3) +
   facet_wrap(~agegroup) +
-  labs(title = "Trainings- en vermoeidheidseffect", 
-       subtitle = "Verloop van prestatie op gist in de tijd per leeftijdsgroep",
-       x = 'Volgorde van experimenten (experimentnummer)',
-       y = 'prestatie gist (percentage correct)') +
+  o +
   scale_colour_manual(name="legenda", values="blue")
-dev.off()
-# grid leeftijdsgroep en gender
-pdf(file = "training-grid-jitter.pdf")
-ggplot(data = matrixProcessed20age, mapping = aes(x = repN, y = ObjError)) +
-  geom_jitter(alpha = 0.1, color = "blue") +
-  stat_smooth(formula = formula, fullrange = TRUE) +
-  stat_fit_glance(method.args = list(formula = formula),
-                  geom = 'text',
-                  aes(label = paste("P-value = ", signif(..p.value.., digits = 2), sep = "")),
-                  label.x.npc = 'right', label.y.npc = 0.35, size = 3) +
-  facet_grid(gender~agegroup) +
-  labs(title = "Trainings- en vermoeidheidseffect", 
-       subtitle = "Verloop van prestatie op gist in de tijd, per leeftijdgroep en geslacht",
-       x = 'Volgorde van experimenten (experimentnummer)',
-       y = 'prestatie gist (percentage correct)') +
-  scale_colour_manual(name="legenda", values="blue")
-dev.off()
-pdf(file = "training-grid.pdf")
-ggplot(data = matrixProcessed20age, mapping = aes(x = repN, y = ObjError)) +
-  stat_smooth(formula = formula, fullrange = TRUE) +
-  stat_fit_glance(method.args = list(formula = formula),
-                  geom = 'text',
-                  aes(label = paste("P-value = ", signif(..p.value.., digits = 2), sep = "")),
-                  label.x.npc = 'right', label.y.npc = 0.35, size = 3) +
-  facet_grid(gender~agegroup) +
-  labs(title = "Trainings- en vermoeidheidseffect", 
-       subtitle = "Verloop van prestatie op gist in de tijd, per leeftijdgroep en geslacht",
-       x = 'Volgorde van experimenten (experimentnummer)',
-       y = 'prestatie gist (percentage correct)') +
-  scale_colour_manual(name="legenda", values="blue")
-dev.off()
+
 
 ggplot(data = matrixSum, mapping = aes(x = cond, y = ObjError, color = participant)) +
   geom_line() +
@@ -117,7 +77,7 @@ ggplot(data = matrixSum, mapping = aes(x = cond, y = ObjError, color = participa
 pValue <- list()
 coef <- list()
 for (x in 1:20) {
-  pv <- matrixProcessed20 %>%
+  pv <- matrixProcessed %>%
     filter(repN <= x) %>%
     group_by(participant, cond) %>%
     summarise(gistError = mean(MVResp))
@@ -132,7 +92,7 @@ coef22 <- list()
 coef23 <- list()
 formula = y ~ poly(x, 2)
 for (x in 1:20) {
-  pv <- matrixProcessed20 %>%
+  pv <- matrixProcessed %>%
     filter(repN <= x) %>%
     group_by(participant, cond) %>%
     summarise(gistError = mean(MVResp)) %>%
@@ -176,20 +136,30 @@ ggplot(data = pvaluePlot, mapping = aes(x = afkap, y = p)) +
 dev.off()
 # lineaire regressie plot met p waarde
 formula = y ~ x
+g <-  labs(title = "Invloed aandachtstaak op bewustzijn", 
+           subtitle = "Lineaire regressie van gistwaarneming en aantal objecten in aandachtstaak",
+           x = 'Conditie (aantal objecten)',
+           y = 'Gistwaarneming (percentage correct)')
 pdf(file = "lineaireRegressie.pdf")
 ggplot(data = matrixSum, aes(x = cond, y = gistError)) +
   stat_smooth(method = 'lm', formula = formula, fullrange = TRUE) +
   stat_fit_glance(method = 'lm',
                   method.args = list(formula = formula),
                   geom = 'text',
-                  aes(label = paste("P-value = ", signif(..p.value.., digits = 2), sep = "")),
-                  label.x.npc = 'right', label.y.npc = 0.35, size = 3) +
-  labs(title = "Inloed aandachtstaak op gistwaarneming", 
-       subtitle = "Toenemende intensiteit van aandachtstaak veroorzaakt minder gistwaarneming",
-       x = 'Conditie (aantal objecten)',
-       y = 'Prestatie gistwaarneming (percentage correct)')
+                  aes(label = paste("p = ", signif(..p.value.., digits = 2), sep = "")),
+                  label.x.npc = 'right', label.y.npc = 0.05, size = 3) +
+  g
 dev.off()
 
+ggplot(data = matrixSum, aes(x = cond, y = gistError)) +
+  stat_smooth(method = 'lm', formula = formula, fullrange = TRUE) +
+  stat_fit_glance(method = 'lm',
+                  method.args = list(formula = formula),
+                  geom = 'text',
+                  aes(label = paste("p = ", signif(..p.value.., digits = 2), sep = "")),
+                  label.x.npc = 'right', label.y.npc = 0.05, size = 3) +
+  g +
+  facet_grid(manvrouw.response~agegroup)
 # met mv facets
 # NIET RELEVANT ??
 ggplot(data = matrixSum, aes(x = cond, y = gistError)) +
@@ -215,9 +185,9 @@ MinMeanSEMMax <- function(x) {
 pdf(file = "boxplotGist-conditie.pdf")
 ggplot(data = matrixSum, mapping = aes(x = cond, y = gistError, group = cond)) +
   stat_summary(fun.data=MinMeanSEMMax, geom="boxplot") +
-  labs(title = "Variatie in prestatie gistwaarneming", 
-       subtitle = "Prestatie in gistwaarneming per conditie",
-       x = 'conditie (aantal objecten)',
-       y = 'prestatie gist (percentage correct)')
+  labs(title = "Invloed aandachtstaak op bewustzijn", 
+       subtitle = "Spreiding van gistwaarneming per conditie",
+       x = 'Conditie (aantal objecten)',
+       y = 'Gistwaarneming (percentage correct)')
 dev.off()
 summary(names)
