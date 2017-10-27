@@ -1,3 +1,10 @@
+##########
+# geschreven voor onderzoek cognitiewetenschappen
+# alle code beschikbaar onder de creative commons licentie
+# https://creativecommons.org/licenses/by-nc-sa/4.0/
+# meer informatie op https://github.com/raoulg/CWI
+# refereer aan de github-url en R.Grouls wanneer je dit werk gebruikt.
+##########
 library(tidyverse)
 require(stats)
 braindata <- read_tsv("http://wps.aw.com/wps/media/objects/14/15269/projects/ch6_iq/brain.txt")

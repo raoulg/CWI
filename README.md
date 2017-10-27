@@ -1,6 +1,6 @@
 # Experiment voor Cognitiewetenschap
 ## Abstract
-Deze code hoort bij het artikel 'titel artikel'. We hebben een experiment ontwikkeld dat vanuit een dual-task conditie onderzoekt in hoeverre de waarneming van de *gist* van afbeeldingen (de hoofdlijnen van een afbeelding die 30ms wordt getoond) interfereert met de intensiviteit van een aandachtstaak.
+Deze code hoort bij het artikel 'Bewustzijn heeft aandacht nodig' (zie `/artikel`). We hebben een experiment ontwikkeld dat vanuit een dual-task paradigme onderzoekt in hoeverre de gistwaarneming (de hoofdlijnen van een afbeelding die 30ms wordt getoond) interfereert met de intensiviteit van een aandachtstaak.
 
 ## PsychoPy
 De basis van de code is gebouwd met behulp van [PsychoPy2](http://www.psychopy.org)[1,2]. Met name het randomiseren van de stimuli is eigen code die ik heb toegevoegd. Om het experiment uit te voeren, is het volgende minimaal  nodig:
@@ -8,6 +8,15 @@ De basis van de code is gebouwd met behulp van [PsychoPy2](http://www.psychopy.o
 - de map met gist afbeeldingen (`/gist`)
 - het excelbestand met de condities (`condities.xlsx`)
 - het `movingDots.psyexp` bestand.
+
+Voor problemen met installeren van PsychoPy kan het nodig zijn om eerst aanvullende pakketen te installeren zoals omschreven op de installatiepagina van PsychoPy.
+
+## Analyse
+Alle analyses uit het artikel zijn gemaakt met de bijgevoegde R code. Om deze te draaien is het nodig om `~/path/to/data/files` te vervangen met het correcte pad naar de .csv-datafiles die PsychoPy produceert.
+
+`datagather-experiment.R` bewerkt alle .csv files totdat de data een bruikbare vorm heeft om met `analyses.R` te plotten.
+
+Alle data van de experimenten die wij met onze groep hebben gemaakt zijn geanonimiseerd beschikbaar als het bestand `data.csv`.
 
 ----
 

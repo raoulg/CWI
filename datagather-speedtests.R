@@ -1,8 +1,14 @@
+##########
+# geschreven voor onderzoek cognitiewetenschappen
+# alle code beschikbaar onder de creative commons licentie
+# https://creativecommons.org/licenses/by-nc-sa/4.0/
+# meer informatie op https://github.com/raoulg/CWI
+# refereer aan de github-url en R.Grouls wanneer je dit werk gebruikt.
+##########
 library(tidyverse)
 library(stringr)
-
-setwd("~/Dropbox/KI/ICW/werkgroep/code/CWI/data/demo")
-datafolder <- "~/Dropbox/KI/ICW/werkgroep/code/CWI/data/demo/"
+setwd("~/path/to/data/files")
+datafolder <- "~/path/to/data/files"
 # readfolder function
 ReadFolder <- function(infolder) {
   data_frame(file = dir(infolder, full.names = TRUE)) 
@@ -64,6 +70,13 @@ ggplot(datas, mapping = aes(x = value, y = rating_3.response, group = seq)) +
        x = 'relatieve snelheid objecten',
        y = 'beoordeling snelheid op vijfpunts-likertscale')
 dev.off()
+datas %>%
+  select(value, rating_3.response) %>%
+  filter(value == 1.0) %>%
+  summarize(mean = mean(rating_3.response),
+            sd = sd(rating_3.response),
+            sdm = sd(rating_3.response)/sqrt(n()))
+
 ggplot(data = data) +
   geom_smooth(method = "glm", aes(x = seq, y = errorcount, color = "lineaire regressie")) +
   geom_point(mapping = aes(x = seq, y = errorcount, color = date))
@@ -76,4 +89,3 @@ ggplot(data = data) +
 ggplot(data = data) +
   geom_smooth(method = "glm", aes(x = seq, y = errorcount, color = "lineaire regressie")) +
   geom_smooth(method = "glm", aes(x = seq, y = errorMV))
-
