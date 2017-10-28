@@ -16,7 +16,7 @@ Alle analyses uit het artikel zijn gemaakt met de bijgevoegde R code. Om deze te
 
 `datagather-experiment.R` bewerkt alle .csv files totdat de data een bruikbare vorm heeft om met `analyses.R` te plotten.
 
-Alle data van de experimenten die wij met onze groep hebben gemaakt zijn geanonimiseerd beschikbaar als het bestand `data.csv`.
+Alle data van de experimenten die wij met onze groep hebben gemaakt zijn geanonimiseerd beschikbaar als het bestand `dataset.csv`.
 
 ----
 
